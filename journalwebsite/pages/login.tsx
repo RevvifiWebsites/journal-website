@@ -2,9 +2,12 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { useState } from "react";
 export default function Login() {
+  const [message, setMSG] = useState("");
   return (
     <>
+    <h1>{message}</h1>
     <input type="text" placeholder="username" id = "username"/>
     <input type="password" placeholder="password" id = "password"/>
     <a href = "/register">register</a>
@@ -18,6 +21,12 @@ export default function Login() {
             "Content-Type": "application/json",
           },
         });
+        if (response.ok) {
+          setMSG("Logged in");
+          window.location.href = "/logged/home";
+        } else {
+          setMSG(JSON.parse(await response.text()).message);
+        }
     }}>login</button>
     </>
   );

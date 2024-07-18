@@ -9,6 +9,7 @@ export default function Home() {
   return (
     <>
     Your logged in!
+    <a href = "/logged/writearticle">write an article</a>
     </>
   );
 }
