@@ -6,16 +6,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   let start = req.query.start as string | undefined;
-  let article = await Prisma.article.findMany({
+  let id = req.query.id as string;
+  let amount = req.query.amount as string | undefined;
+  let comment = await Prisma.comment.findMany({
     where: {
-      published: true,
+        articleId : id
     },
     skip: start ? parseInt(start) : 0,
-    take: 10,
+    take: amount ? parseInt(amount) : 10,
   });
-  console.log(article);
-  if (article) {
-    res.status(200).json(article);
+
+  if (comment) {
+    res.status(200).json(comment);
   } else {
     res.status(404).json({ message: "Article not found" });
   }

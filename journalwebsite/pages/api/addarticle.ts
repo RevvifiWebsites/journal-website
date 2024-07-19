@@ -10,14 +10,15 @@ export  default async function handler(
 ) {
     let user = await getUser(req);
     if(user){
-        await Prisma.article.create({
+        const article = await Prisma.article.create({
             data: {
                 title: req.body.title,
                 content: req.body.content,
-                authorId: user.id
+                authorId: user.id,
+                credit: req.body.authors || user.name,
             }
         });
-        res.status(200).json({ message: "Article created" });
+        res.status(200).json({ message: "Article created",  id:  article.id });
     }
     else {
         res.status(401).json({ message: "Not logged in" });

@@ -8,8 +8,10 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <>
+    <h1> this still needs to be styled</h1>
       <a href = "/login">login</a>
-      <a href = "/logged/test">login</a>
+      <a href = "/register">register</a>
+      <a href = "/logged/addarticle">add article</a>
     </>
   );
 }

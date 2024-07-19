@@ -16,11 +16,24 @@ model Article {
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  credit    String?
+  comments  Comment[]
+}
+model Comment{
+  id        String     @default(cuid()) @id
+  content   String
+  author    User?   @relation(fields: [authorId, authorName], references: [id, name])
+  authorId  String?
+  article   Article? @relation(fields: [articleId], references: [id])
+  articleId String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  authorName String?
 }
 
 model User {
   id            String       @default(cuid()) @id
-  name          String?
+  name          String?   @unique
   email         String?   @unique
   passwordHash  String?
   salt         String?
@@ -28,5 +41,7 @@ model User {
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   posts         Article[]
   admin        Boolean    @default(false)
+  comments     Comment[]
   @@map(name: "users")
+  @@unique([id, name])
 }

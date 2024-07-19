@@ -17,7 +17,9 @@ export default function Browse() {
   }, []);
   return <>{
     articles.map((article) => {
-      return <div key={article.id}>
+      return <div key={article.id} onClick={() => {
+        window.location.href = "/article/" + article.id;
+      }}>
         <h1>{article.title}</h1>
         <p>{article.content}</p>
       </div>;
