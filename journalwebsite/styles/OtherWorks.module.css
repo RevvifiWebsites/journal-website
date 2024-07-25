@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  gap: 25px;
+}
+
+.container > img {
+  flex: 0 0 auto;
+  width: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.textContent {
+  max-width: 70ch;
+}
+
+.tags {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}

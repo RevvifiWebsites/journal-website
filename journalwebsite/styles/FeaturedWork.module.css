@@ -1,0 +1,11 @@
+.container {
+  max-width: 430px;
+  display: grid;
+  gap: 5px;
+}
+
+.tags {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}

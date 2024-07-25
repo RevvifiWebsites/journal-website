@@ -1,9 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
 :root {
   --max-width: 1100px;
-  --border-radius: 12px;
+  --border-radius: 5px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  --fs-h1: 4rem;
+  --fs-h2: 2.25rem;
+  --fs-h3: 1.5rem;
+  --fs-h4: 0.875rem;
+  --fs-body-regular: 1rem;
+  --fs-body-small: 0.875rem;
+  --fs-body-mobile: 0.625rem;
+
+  --clr-light-1: #fffff0;
+  --clr-light-2: #f1f1f1;
+  --clr-light-3: #bbbbbb;
+  --clr-dark-1: #0c0a0c;
+  --clr-dark-2: #1b181b;
+  --clr-dark-3: #1b181b;
+  --clr-dark-4: #433c43;
+  --clr-accent: #fd7e14;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -40,68 +59,119 @@
   --card-border-rgb: 131, 134, 135;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
+.heading-1 {
+  font-size: var(--fs-h1);
+}
+
+.heading-2 {
+  font-size: var(--fs-h2);
+}
+
+.heading-3 {
+  font-size: var(--fs-h3);
+}
+
+.heading-4 {
+  font-size: var(--fs-h4);
+}
+
+.body-regular {
+  font-size: var(--fs-body-regular);
+  letter-spacing: 0.07ch;
+}
+.body-secondary {
+  font-size: var(--fs-body-small);
+  color: var(--clr-light-3);
+}
+
+.body-bold {
+  font-size: var(--fs-body-regular);
+  font-weight: 600;
+}
+
+.body-small {
+  font-size: var(--fs-body-small);
+}
+
+.body-mobile {
+  font-size: var(--fs-body-mobile);
+}
+
+.accent-color {
+  color: var(--clr-accent);
+}
+
 html,
 body {
   max-width: 100vw;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: var(--clr-dark-2);
+  color: var(--clr-light-1);
   overflow-x: hidden;
+  padding: 30px 30px 30px 60px;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  display: grid;
+  place-items: center;
+}
+
+section {
+  margin: 100px 0;
+}
+
+input {
+  background-color: var(--clr-dark-2);
+  border: 1px solid var(--clr-accent);
+  color: var(--clr-light-3);
+  padding: 15px 25px;
+  outline: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: var(--fs-body-regular);
+  border-radius: var(--border-radius);
 }
 
 a {
   color: inherit;
   text-decoration: none;
 }
+button {
+  border: none;
+  font-size: var(--fs-body-regular);
+  font-weight: 550;
+  padding: 8px 30px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.button-primary,
+.button-secondary:hover {
+  background-color: var(--clr-accent);
+  color: var(--clr-light-1);
+}
+
+.button-primary:hover,
+.button-secondary {
+  background-color: var(--clr-light-1);
+  color: var(--clr-accent);
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+footer {
+  display: grid;
+  place-items: center;
+  gap: 80px;
+  text-align: center;
+  position: relative;
 }
