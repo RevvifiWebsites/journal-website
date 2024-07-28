@@ -19,3 +19,13 @@
   gap: 5px;
   margin-top: 5px;
 }
+
+@media (max-width: 420px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .container > img {
+    width: 100%;
+  }
+}

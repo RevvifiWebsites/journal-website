@@ -8,7 +8,7 @@ import styles from "../styles/Index.module.css"
 export default function Home() {
   return (
     <div className={styles.container}>
-      <img src="/images/BG.png" className="background-image" />
+      {/* <img src="/images/BG.png" className="background-image" draggable="false"/> */}
       <div className={styles.sidebar}></div>
       <div className={styles.hero}>
         <div className={styles.heroLeft}>
@@ -24,7 +24,7 @@ export default function Home() {
         <div className={styles.heroRight}>
           <div className={styles.spacer}></div>
 
-          <div className={styles.heroCard}>
+          <div className={`${styles.heroCard} ${styles.item1}`}>
             <div className={styles.flex}>
               <img src="/icons/pencil.svg" />
               <p className="body-bold">Public Research</p>
@@ -32,7 +32,7 @@ export default function Home() {
             <p className="body-small">Share your own research with others. Your research will first be check by our moderators.</p>
           </div>
 
-          <div className={styles.heroCard}>
+          <div className={`${styles.heroCard} ${styles.item2}`}>
           <div className={styles.flex}>
               <img src="/icons/eye.svg" />
               <p className="body-bold">View Researches</p>
@@ -40,7 +40,7 @@ export default function Home() {
             <p className="body-small">Explore our huge library, with thousands of researches on various topics, by brilliant minds.</p>
           </div>
 
-          <div className={styles.heroCard}>
+          <div className={`${styles.heroCard} ${styles.item3}`}>
           <div className={styles.flex}>
               <img src="/icons/bulb.svg" />
               <p className="body-bold">Fun Fact Scattered</p>
@@ -48,7 +48,7 @@ export default function Home() {
             <p className="body-small">You can find fun facts scattered around the website, so your mind stays refreshed.</p>
           </div>
 
-          <div className={styles.heroCard}>
+          <div className={`${styles.heroCard} ${styles.item4}`}>
           <div className={styles.flex}>
               <img src="/icons/people.svg" />
               <p className="body-bold">Vibrant Community</p>
@@ -59,12 +59,12 @@ export default function Home() {
       </div>
       
       <div className={styles.uniList}>
-        <img src="/icons/penn.svg" />
-        <img src="/icons/duke.svg" />
-        <img src="/icons/nyu.svg" />
-        <img src="/icons/oxford.svg" />
-        <img src="/icons/stanford.svg" />
-        <img src="/icons/lseps.svg" />
+        <img src="/icons/penn.svg" draggable="false"/>
+        <img src="/icons/duke.svg" draggable="false"/>
+        <img src="/icons/nyu.svg" draggable="false"/>
+        <img src="/icons/oxford.svg" draggable="false"/>
+        <img src="/icons/stanford.svg" draggable="false"/>
+        <img src="/icons/lseps.svg" draggable="false"/>
       </div>
 
       <section className={styles.fw}>

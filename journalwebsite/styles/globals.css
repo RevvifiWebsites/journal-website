@@ -126,6 +126,18 @@ section {
   margin: 100px 0;
 }
 
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 input {
   background-color: var(--clr-dark-2);
   border: 1px solid var(--clr-accent);
@@ -147,7 +159,7 @@ button {
   font-weight: 550;
   padding: 8px 30px;
   border-radius: var(--border-radius);
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .button-primary,
@@ -166,6 +178,7 @@ button {
   position: absolute;
   top: 0;
   left: 0;
+  pointer-events: none;
 }
 
 footer {
@@ -174,4 +187,31 @@ footer {
   gap: 80px;
   text-align: center;
   position: relative;
+}
+
+/* Media Queries for Mobile Layout */
+
+@media (max-width: 420px) {
+  html,
+  body {
+    margin: 0;
+    padding: 50px 15px 20px 15px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  button {
+  }
+
+  .heading-1 {
+    font-size: var(--fs-h2);
+  }
+
+  .heading-2 {
+    font-size: var(--fs-h3);
+  }
+
+  .body-regular {
+    font-size: var(--fs-body-small);
+  }
 }

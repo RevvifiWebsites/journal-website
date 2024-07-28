@@ -24,15 +24,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
   gap: 90px;
 }
 
 .heroLeft {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
-  max-width: 51ch;
+  flex: 1 1 494px;
+  /* max-width: 51ch; */
 }
 
 .buttonContainer {
@@ -42,12 +44,29 @@
 }
 
 .heroRight {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   gap: 10px 5px;
   height: 200px;
+  max-width: 650px; */
   max-width: 650px;
+  display: grid;
+  grid-template-columns: 35px auto 35px auto;
+  gap: 5px;
+  margin: 0 auto;
   position: relative;
+}
+
+.item1 {
+  grid-column: 2/4;
+}
+
+.item3 {
+  grid-column: 1/3;
+}
+
+.item4 {
+  grid-column: 3/5;
 }
 
 .heroRight::before {
@@ -56,8 +75,8 @@
   top: 55%;
   right: 50%;
   transform: translate(50%, -50%);
-  width: 300px;
-  height: 100px;
+  width: 60%;
+  height: 40%;
   background-color: #fd7e14;
   filter: blur(50px);
   -webkit-filter: blur(50px);
@@ -66,8 +85,8 @@
 .heroCard {
   background-color: #1b181b;
   /* background-color: red; */
-  width: 300px;
-  height: 120px;
+  /* width: 300px; */
+  /* height: 120px; */
   padding: 15px 20px;
   border-radius: 5px;
   z-index: 10;
@@ -110,9 +129,11 @@
 
 /* *** Featured Work *** */
 .featuredWorkContainer {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin-top: 40px;
   position: relative;
   gap: 50px;
@@ -125,6 +146,7 @@
 .backgroundImage {
   position: absolute;
   top: 0;
+  pointer-events: none;
 }
 
 /* *** Other Works *** */
@@ -152,6 +174,7 @@
   justify-content: space-evenly;
   align-items: center;
   gap: 100px;
+  margin-bottom: 100px;
 }
 
 /* *** Footer *** */
@@ -188,4 +211,22 @@
 
 .footerBottom span {
   margin-left: 20px;
+}
+
+/* Media Queries for Mobile Layout */
+
+@media (max-width: 420px) {
+  .sidebar {
+    width: 100vw;
+    height: 60px;
+  }
+
+  .spacer {
+    width: 0;
+    height: 0;
+  }
+
+  .footerContent {
+    margin-top: 100px;
+  }
 }
