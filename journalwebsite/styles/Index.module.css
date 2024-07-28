@@ -185,8 +185,9 @@
 }
 
 .footerContent {
-  margin-top: 200px;
+  margin-top: 8vw;
   z-index: 100;
+  position: relative;
 }
 
 .footerContent > h2 {
@@ -215,15 +216,27 @@
 
 /* Media Queries for Mobile Layout */
 
-@media (max-width: 420px) {
+@media (max-width: 500px) {
   .sidebar {
     width: 100vw;
     height: 60px;
   }
 
+  .heroRight {
+    grid-template-columns: 15px auto 15px auto;
+  }
+
+  .heroRight::before {
+    width: 30%;
+  }
+
   .spacer {
     width: 0;
     height: 0;
+  }
+
+  .item1 {
+    grid-column: 1/4;
   }
 
   .footerContent {
