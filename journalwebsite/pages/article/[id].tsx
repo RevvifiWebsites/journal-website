@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 
 export default function Home() {
+  const [pdffile, setPdfFile] = useState({} as any);
+
   const [article, setArticle] = useState({
     title: "Loading...",
     content: "",
     credit: "",
+    file: null as {
+      url: string;
+    } | null,
   });
   const router = useRouter();
   const [comments, setComments] = useState([
@@ -49,6 +54,19 @@ export default function Home() {
       })
       .then((data) => {
         setArticle(data);
+        if (data.file) {
+          console.log(data.file.downloadUrl);
+          fetch(data.file.downloadUrl, {})
+            .then((res) => {
+              if (res.ok) {
+                return res.text();
+              }
+            })
+            .then((data) => {
+              console.log(data);
+              setPdfFile(data);
+            });
+        }
       });
   }, [id]);
   return (
@@ -56,6 +74,7 @@ export default function Home() {
       {article.title}
       <h2>By {article.credit}</h2>
       <Markdown>{article.content}</Markdown>
+      {article.file && pdffile && <object data = {"data:application/pdf;base64," + pdffile} type="application/pdf"  ></object>}
       <br></br>
       <hr></hr>
       {comments.map((comment) => {
