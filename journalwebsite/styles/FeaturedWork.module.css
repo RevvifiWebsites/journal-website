@@ -1,0 +1,29 @@
+.container {
+  max-width: 430px;
+  display: grid;
+  gap: 5px;
+}
+
+.tags {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.thumbnail {
+  width: 100%;
+}
+
+.tagIcon {
+  max-width: 2vw;
+}
+
+@media (max-width: 420px) {
+  /* .thumbnail {
+    width: 100%;
+  } */
+
+  .tagIcon {
+    width: 20px;
+  }
+}

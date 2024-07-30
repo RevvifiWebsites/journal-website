@@ -1,0 +1,48 @@
+.container {
+  max-width: 480px;
+  border-radius: 5px;
+  padding: 40px;
+  position: relative;
+  z-index: 50;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 100%;
+  height: 90%;
+  background-color: #fd7e14;
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+  z-index: -2;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  background-color: #1b181b;
+  z-index: -1;
+}
+
+.list {
+  margin: 10px;
+}
+
+@media (max-width: 420px) {
+  .container {
+    width: 80vw;
+  }
+
+  .container::before {
+    filter: blue(20px);
+    -webkit-filter: blue(20px);
+  }
+}
