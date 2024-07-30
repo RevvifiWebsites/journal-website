@@ -74,7 +74,7 @@ export default function Home() {
       {article.title}
       <h2>By {article.credit}</h2>
       <Markdown>{article.content}</Markdown>
-      {article.file && pdffile && <object data = {"data:application/pdf;base64," + pdffile} type="application/pdf"  ></object>}
+      {article.file && pdffile && <embed src = {"data:application/pdf;base64," + pdffile} type="application/pdf"  ></embed>}
       <br></br>
       <hr></hr>
       {comments.map((comment) => {

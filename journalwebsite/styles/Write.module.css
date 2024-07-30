@@ -3,6 +3,7 @@
 }
 .page button {
     padding: 0px;
+    color: white;
 }
 .page{
     background-color: #1b181b;
@@ -103,7 +104,7 @@
     padding-bottom: 30px;
 }
 .filebutton {
-    padding: 3% 8%;
+    padding: 3% 8%!important;
     border: 20px;
     background-color: #FD7E14;
     border-radius: 5px;
@@ -143,4 +144,28 @@
     padding: 0.5% 1%!important;
     background-color: #FD7E14;
     border-radius: 8px;
+}
+@media (max-width:701px) {
+    .centerpage {
+        margin: 3%;
+        margin-top: 5%;
+    }
+    .page textarea {
+        width: 80vw;
+    }
+    .multiselect {
+        width: 80vw;
+    }
+    .markdown {
+        width: 80vw;
+    }
+    .page label {
+        width: 80vw
+    }
+    .iframes {
+        width: 80vw;
+    }
+    .submitbutton {
+        width: 80vw;
+    }
 }

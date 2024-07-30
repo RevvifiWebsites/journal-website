@@ -22,7 +22,7 @@ export default function Home() {
         embed.style.transform = "translateY(-4%)";
       }
     }
-  }, [file]);
+  }, [file, filesubmit]);
   return (
     <div className={styles.page}>
       <div className={styles.centerpage}>
@@ -145,7 +145,7 @@ export default function Home() {
               src={URL.createObjectURL(file).toString() + "#toolbar=0"}
               className={styles.iframes}
               id="embed"
-            ></embed></div> 
+            ></embed></div>
           )
         ) : (
           <Markdown className={styles.markdown}>{article.content}</Markdown>
