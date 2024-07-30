@@ -1,0 +1,77 @@
+
+
+.sidebar {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 5vw;
+    background-color: #252225;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.navcontainers{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3vh;
+}
+.navimage{
+    width: 2vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navimagewrap {
+    width: 2vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:  #1B181B;
+    border-radius: 10px;
+    width: 2.5vw;
+    height: 2.5vw;
+    padding: 1.5vh!important;
+
+}
+.smallnavimage {
+    width: 1.5vw;
+    height: 1.5vw;
+}
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100vw;
+        height: 5vh;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .navcontainers{
+        margin-left: 1vh;
+        margin-right: 1vh;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3vh;
+    }
+    .navimage {
+        width: 3vh;
+        height: 3vh;
+    }
+    .smallnavimage {
+        width: 2.5vh;
+        height: 2.5vh;
+    }
+    .navimagewrap {
+        width: 3.5vh;
+        height: 3.5vh;
+    }
+}

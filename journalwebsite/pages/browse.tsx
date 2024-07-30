@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SideBar from "./sidebar";
 
 export default function Browse() {
   const [articles, setArticles] = useState([ {
@@ -15,7 +16,9 @@ export default function Browse() {
         setArticles(data);
       })
   }, []);
-  return <>{
+  return <>
+  <SideBar/>
+  {
     articles.map((article) => {
       return <div key={article.id} onClick={() => {
         window.location.href = "/article/" + article.id;

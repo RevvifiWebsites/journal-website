@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
+import SideBar from "../sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function Home() {
   }, [])
   return (
     <>
+    <SideBar/>
     Your logged in!
     <a href = "/logged/writearticle">write an article</a>
     <a href = "/browse">browse articles</a>

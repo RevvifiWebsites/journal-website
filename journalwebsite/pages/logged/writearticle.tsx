@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "@/styles/Write.module.css";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import SideBar from "../sidebar";
 
 export default function Home() {
   //TODO maybe save this to local storage so that it isn't lost? maybe allow draft saving?
@@ -25,6 +26,7 @@ export default function Home() {
   }, [file, filesubmit]);
   return (
     <div className={styles.page}>
+      <SideBar/>
       <div className={styles.centerpage}>
         <h1>Submit Your Research Here</h1>
         <div>

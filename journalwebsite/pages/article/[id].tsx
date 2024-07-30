@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
+import SideBar from "../sidebar";
 
 export default function Home() {
   const [pdffile, setPdfFile] = useState({} as any);
@@ -73,6 +74,7 @@ export default function Home() {
   }, [id]);
   return (
     <>
+    <SideBar></SideBar>
       {!article.published && <div>
         This article is not yet published. It will not be discoverable to others untill it has been approved </div>}
       {article.title}

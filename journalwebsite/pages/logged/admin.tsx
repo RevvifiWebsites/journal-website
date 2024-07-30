@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
+import SideBar from "../sidebar";
 
 export default function Admin() {
   const [user, setUser] = useState({
@@ -55,6 +56,7 @@ export default function Admin() {
   }, []);
   return (
     <>
+      <SideBar/>
       <h1>Admin Panel</h1>
       {articles.map((article) => {
         return (
