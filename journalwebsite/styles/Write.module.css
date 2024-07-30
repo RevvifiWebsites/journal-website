@@ -1,7 +1,12 @@
-
+.page textarea {
+    color: white;
+}
+.page button {
+    padding: 0px;
+}
 .page{
     background-color: #1b181b;
-    position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
@@ -9,6 +14,8 @@
     overflow: visible;
     display: flex;
     flex-direction: column;
+    background-image: url("/images/BG.png");
+    background-repeat: no-repeat;
 }
 .centerpage{
     display: flex;
@@ -133,7 +140,7 @@
 }
 .submitbutton {
     width: 20vw;
-    padding: 0.5% 1%;
+    padding: 0.5% 1%!important;
     background-color: #FD7E14;
     border-radius: 8px;
 }

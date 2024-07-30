@@ -1,5 +1,4 @@
-"use client";
-import Head from "next/head";
+
 import Image from "next/image";
 import styles from "@/styles/Write.module.css";
 import { useEffect, useState } from "react";
