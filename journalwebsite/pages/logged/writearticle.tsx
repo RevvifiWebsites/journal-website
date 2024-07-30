@@ -2,18 +2,28 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Write.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 
 export default function Home() {
   //TODO maybe save this to local storage so that it isn't lost? maybe allow draft saving?
   const [article, setArticle] = useState({
     title: "Enter Title",
-    content: "" as string | null, 
+    content: "" as string | null,
     authors: "",
   });
   const [filesubmit, setFileSubmit] = useState(true);
   const [file, setFile] = useState(null as File | null);
+  useEffect(() => {
+    if(navigator.userAgent.indexOf("Firefox") != -1){
+      let parent = document.getElementById("parentdiv");
+      let embed = document.getElementById("embed");
+      if(parent && embed){
+        parent.style.overflow = "hidden";
+        embed.style.transform = "translateY(-4%)";
+      }
+    }
+  }, [file]);
   return (
     <div className={styles.page}>
       <div className={styles.centerpage}>
@@ -89,6 +99,7 @@ export default function Home() {
                 onChange={(e) => {
                   if (e.target.files) {
                     setFile(e.target.files[0]);
+                    console.log(e.target.files[0]);
                   }
                 }}
                 accept=".pdf"
@@ -129,11 +140,13 @@ export default function Home() {
         <h1 className={styles.leftinputtitle}>Preview</h1>
         {filesubmit ? (
           file && (
-            <object
+
+            <div id = "parentdiv" ><embed
               type="application/pdf"
-              data={URL.createObjectURL(file)}
+              src={URL.createObjectURL(file).toString() + "#toolbar=0"}
               className={styles.iframes}
-            ></object>
+              id="embed"
+            ></embed></div> 
           )
         ) : (
           <Markdown className={styles.markdown}>{article.content}</Markdown>
@@ -141,33 +154,41 @@ export default function Home() {
         <button
           className={styles.submitbutton}
           onClick={async (e) => {
-            if (article.title == "Enter Title" || (article.content == "" && !filesubmit)) {
+            if (
+              article.title == "Enter Title" ||
+              (article.content == "" && !filesubmit)
+            ) {
               return;
             }
-            if(filesubmit && !file){
+            if (filesubmit && !file) {
               return;
             }
-            if(filesubmit ) {
-              setArticle({...article, content: null});
+            if (filesubmit) {
+              setArticle({ ...article, content: null });
             }
             console.log(file);
             let base64file = null;
-            if(file){
+            if (file) {
               base64file = await new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = () => {
-                  resolve((reader.result as string).replace(/^data:.+;base64,/, ""));
+                  resolve(
+                    (reader.result as string).replace(/^data:.+;base64,/, "")
+                  );
                 };
                 reader.readAsDataURL(file);
               });
             }
             const res = await fetch("/api/addarticle", {
               method: "POST",
-              body: JSON.stringify({...article, ...{
-                file: file ? base64file : null,
-                filename: file ? file.name : null,
-                filetype: file ? file.type : null,
-              }} ) ,
+              body: JSON.stringify({
+                ...article,
+                ...{
+                  file: file ? base64file : null,
+                  filename: file ? file.name : null,
+                  filetype: file ? file.type : null,
+                },
+              }),
               headers: {
                 "Content-Type": "application/json",
               },

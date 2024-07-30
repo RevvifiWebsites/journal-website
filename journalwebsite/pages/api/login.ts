@@ -16,7 +16,7 @@ export  default async function handler(
   if(user){
     let hashinput = req.body.password + user.salt;
     if (user.passwordHash && await argon2.verify(user.passwordHash, hashinput)) {
-      const token = sign({ username: user.name }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+      const token = sign({ username: user.name }, process.env.JWT_SECRET as string, {  });
       res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Secure; SameSite=Strict; Path=/`);
       res.status(200).json({ message: "Logged in" });
     }
