@@ -24,7 +24,13 @@ export default function Login() {
             "Content-Type": "application/json",
           },
         });
-        console.log(response);
+        if (response.ok) {
+          
+          window.location.href = "/login";
+        } else {
+          console.log("error");
+          //todo add error message
+        }
     }}>register</button>
     </>
   );

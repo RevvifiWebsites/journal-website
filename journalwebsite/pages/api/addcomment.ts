@@ -15,7 +15,7 @@ export default async function handler(
                 authorName: user.name
             }
         });
-        res.status(200).json({ message: "Comment created",  id:  comment.id });
+        res.status(200).json({ message: "Comment created",  id:  comment.id, authorName: comment.authorName});
     }
     else {
         res.status(401).json({ message: "Not logged in" });

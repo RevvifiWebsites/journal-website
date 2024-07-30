@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.17.0",
+    "@vercel/blob": "^0.23.4",
     "@vercel/postgres": "^0.9.0",
     "argon2": "^0.40.3",
     "jsonwebtoken": "^9.0.2",

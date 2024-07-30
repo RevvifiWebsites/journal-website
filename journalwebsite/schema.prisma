@@ -29,6 +29,9 @@ model Comment{
   articleId String?
   createdAt DateTime @default(now()) @map(name: "created_at")
   authorName String?
+  upvotes   String[]
+  downvotes String[]
+
 }
 
 model User {
