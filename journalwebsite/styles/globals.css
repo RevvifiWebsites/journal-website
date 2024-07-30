@@ -51,6 +51,7 @@
   font-size: var(--fs-body-regular);
   letter-spacing: 0.07ch;
 }
+
 .body-secondary {
   font-size: var(--fs-body-small);
   color: var(--clr-light-3);
@@ -179,5 +180,10 @@ footer {
 
   .body-regular {
     font-size: var(--fs-body-small);
+  }
+
+  .body-secondary {
+    font-size: var(--fs-body-mobile);
+    color: var(--clr-light-3);
   }
 }

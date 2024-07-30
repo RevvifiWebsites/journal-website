@@ -8,14 +8,14 @@ import styles from "../styles/Index.module.css"
 export default function Home() {
   return (
     <div className={styles.container}>
-      {/* <img src="/images/BG.png" className="background-image" draggable="false"/> */}
+      <img src="/images/BG.png" className="background-image" draggable="false"/>
       <div className={styles.sidebar}></div>
       <div className={styles.hero}>
         <div className={styles.heroLeft}>
         <h1 className="heading-1">Modern Hub for <br/> Young Researchers</h1>
         <p className="body-regular">Here high-school and college students can share their scientific research in English or Russian. They can also exchange ideas and opinions</p>
         <div className={styles.buttonContainer}>
-          <button className="button-primary">Sign Up</button>
+          <button className="button-primary"><a href="/login">Sign Up</a></button>
           <button className="button-secondary">View Featured 🠇</button>
         </div>
         
@@ -143,8 +143,8 @@ export default function Home() {
       <footer>
         <img className={styles.footerCurve} src="/images/footerCurve.png" />
         <div className={styles.footerContent}>
-          <h2 className="heading-2">Today could be the best day of<br/> your (research) life</h2>
-          <button className="button-primary">Sign Up</button>
+          <h2 className="heading-2">Today could be the best day of your (research) life</h2>
+          <button className="button-primary"><a href="/login">Sign Up</a></button>
         </div>
         
         <div className={styles.footerBottom}>
