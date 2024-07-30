@@ -13,6 +13,7 @@ export default function Home() {
     file: null as {
       url: string;
     } | null,
+    published: true,
   });
   const router = useRouter();
   const [comments, setComments] = useState([
@@ -22,6 +23,7 @@ export default function Home() {
       id: "Loading...",
       downvotes: [""],
       upvotes: [""],
+      
     },
   ]);
   const [comment, setComment] = useState("");
@@ -71,6 +73,8 @@ export default function Home() {
   }, [id]);
   return (
     <>
+      {!article.published && <div>
+        This article is not yet published. It will not be discoverable to others untill it has been approved </div>}
       {article.title}
       <h2>By {article.credit}</h2>
       <Markdown>{article.content}</Markdown>
