@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
-import SideBar from "./sidebar";
+// import SideBar from "./sidebar";
+import Navigation from "./sidebar";
 import FeaturedWork from "./FeaturedWork";
 import OtherWorks from "./OtherWorks";
 import FunFacts from "./FunFacts";
@@ -11,7 +12,7 @@ export default function Home() {
     <div className={styles.container}>
       <img src="/images/BG.png" className="background-image" draggable="false"/>
       {/* <div className={styles.sidebar}></div> */}
-      <SideBar/>
+      <Navigation/>
       <div className={styles.hero}>
         <div className={styles.heroLeft}>
         <h1 className="heading-1">Modern Hub for <br/> Young Researchers</h1>
