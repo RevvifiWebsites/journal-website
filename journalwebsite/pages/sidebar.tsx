@@ -1,3 +1,4 @@
+
 import styles from "@/styles/Sidebar.module.css";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
@@ -7,7 +8,10 @@ const Sidebar = () => {
   const expandedLogo = <p className={styles.logoText}><span className="accent-color">young</span>minds.</p>
 
   const [isHovering, setIsHovering] = useState(false);
-
+  const [isclient , setClient] = useState(false);
+  useEffect(() => {
+    setClient(true);
+  }, []);
   return (
     <div
         className={styles.sidebar}
@@ -36,9 +40,9 @@ const Sidebar = () => {
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/account.svg"></Image>
           <p className="body-bold">Account</p>
         </a>
-          <a href="/logout" className={styles.navLink}>
+        <a href={isclient && document.cookie.indexOf("username") == -1 ?  "/login" : "/logout"} className={styles.navLink}>
               <Image width={0} height={0} className = {styles.navimage} alt = "logout" src = "/images/logout.svg"></Image>
-              <p className="body-bold">Logout</p>
+              <p className="body-bold">{ isclient && document.cookie.indexOf("username") == -1 ?  "Login" : "Logout"}</p>
           </a>
       </div>
     </div>
@@ -47,11 +51,13 @@ const Sidebar = () => {
 
 const Topbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  
   const toggleNav = () => {
     setIsExpanded(!isExpanded);
   }
-
+  const [isclient , setClient] = useState(false);
+  useEffect(() => {
+    setClient(true);
+  }, []);
   return (
     <div className={`${styles.topNav} ${isExpanded ? styles.expanded : styles.collapsed}`}>
       <div className={styles.menuBar}>
@@ -72,9 +78,9 @@ const Topbar = () => {
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/account.svg"></Image>
           <p className="body-bold">Account</p>
         </a>
-          <a href="/logout" className={styles.navLink}>
+        <a href={isclient && document.cookie.indexOf("username") == -1 ?  "/login" : "/logout"} className={styles.navLink}>
               <Image width={0} height={0} className = {styles.navimage} alt = "logout" src = "/images/logout.svg"></Image>
-              <p className="body-bold">Logout</p>
+              <p className="body-bold">{ isclient && document.cookie.indexOf("username") == -1 ?  "Login" : "Logout"}</p>
           </a>
       </div>
     </div>
