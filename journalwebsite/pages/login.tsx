@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Login.module.css";
 import { useState } from "react";
 export default function Login() {
   const [message, setMSG] = useState("");
