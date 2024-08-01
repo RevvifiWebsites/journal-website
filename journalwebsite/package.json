@@ -15,6 +15,7 @@
     "argon2": "^0.40.3",
     "jsonwebtoken": "^9.0.2",
     "next": "14.2.5",
+    "pdfjs-dist": "^4.5.136",
     "prisma": "^5.17.0",
     "react": "^18",
     "react-dom": "^18",
