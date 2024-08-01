@@ -11,22 +11,22 @@ export  default async function handler(
 ) {
     let user = await getUser(req);
     if(user){
+        if(!req.body.file){
+            res.status(400).json({ message: "No file" });
+            return;
+        }
         const article = await Prisma.article.create({
             data: {
                 title: req.body.title,
-                content: req.body.content,
                 authorId: user.id,
                 credit: req.body.authors || user.name,
+                type: req.body.type,
             }
         });
-        if(req.body.file){
-            console.log("file");
             let blob = await  put(`articles/${article.id}`, req.body.file, {
                 access: 'public',
                 contentType: "application/pdf"
               });
-            console.log(blob);
-        }
         res.status(200).json({ message: "Article created",  id:  article.id });
     }
     else {

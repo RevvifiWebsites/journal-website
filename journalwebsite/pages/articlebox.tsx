@@ -6,7 +6,6 @@ import * as pdf from "pdfjs-dist";
 export default  function Articlebox(Article: {
   id: string;
   title: string;
-  content: string;
   credit: string;
 }) {
     pdf.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.mjs"

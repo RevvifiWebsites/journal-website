@@ -9,10 +9,8 @@ export default function Home() {
   //TODO maybe save this to local storage so that it isn't lost? maybe allow draft saving?
   const [article, setArticle] = useState({
     title: "Enter Title",
-    content: "" as string | null,
     authors: "",
   });
-  const [filesubmit, setFileSubmit] = useState(true);
   const [file, setFile] = useState(null as File | null);
   useEffect(() => {
     if(navigator.userAgent.indexOf("Firefox") != -1){
@@ -23,7 +21,7 @@ export default function Home() {
         embed.style.transform = "translateY(-4%)";
       }
     }
-  }, [file, filesubmit]);
+  }, [file]);
   return (
     <div className={styles.page}>
       <SideBar/>
@@ -54,30 +52,8 @@ export default function Home() {
         <h2 className={styles.leftinputtitle}>Submit Article</h2>
         <div>
           <div className={styles.rightcontents}>
-            <button
-              className={styles.multiselect}
-              onClick={() => {
-                setArticle({ ...article, content: "" });
-                setFileSubmit(!filesubmit);
-              }}
-            >
-              <div
-                className={
-                  filesubmit ? styles.activemulti : styles.inactivemulti
-                }
-              >
-                File
-              </div>
-              <div
-                className={
-                  !filesubmit ? styles.activemulti : styles.inactivemulti
-                }
-              >
-                Text
-              </div>
-            </button>
+            
           </div>
-          {filesubmit ? (
             <label htmlFor="file" className={styles.fileinputcont}>
               {!file && (
                 <Image
@@ -118,28 +94,10 @@ export default function Home() {
                 <div className={styles.filebutton}>Select File</div>
               )}
             </label>
-          ) : (
-            <div>
-              <textarea
-                id="content"
-                className={styles.content}
-                placeholder="Articles support markdown formatting"
-                onKeyDown={(e) => {
-                  if (e.key == "Enter") {
-                    setArticle({ ...article, content: article.content + "\n" });
-                    (e.target as HTMLTextAreaElement).value =
-                      article.content + "\n";
-                  }
-                }}
-                onChange={(e) => {
-                  setArticle({ ...article, content: e.target.value });
-                }}
-              ></textarea>
-            </div>
-          )}
+          
         </div>
         <h1 className={styles.leftinputtitle}>Preview</h1>
-        {filesubmit ? (
+        {  (
           file && (
 
             <div id = "parentdiv" ><embed
@@ -149,25 +107,14 @@ export default function Home() {
               id="embed"
             ></embed></div>
           )
-        ) : (
-          <Markdown className={styles.markdown}>{article.content}</Markdown>
-        )}
+        ) }
         <button
           className={styles.submitbutton}
           onClick={async (e) => {
             if (
-              article.title == "Enter Title" ||
-              (article.content == "" && !filesubmit)
-            ) {
-              return;
-            }
-            if (filesubmit && !file) {
-              return;
-            }
-            if (filesubmit) {
-              setArticle({ ...article, content: null });
-            }
-            console.log(file);
+              article.title == "Enter Title" || !file) {
+                return;
+              }
             let base64file = null;
             if (file) {
               base64file = await new Promise((resolve, reject) => {

@@ -6,7 +6,6 @@ export default function Browse() {
   const [articles, setArticles] = useState([{
     id: "",
     title: "Loading...",
-    content: "Loading...",
     credit: "Loading...",
     file: null,
   }]);
@@ -26,7 +25,7 @@ export default function Browse() {
   <ol className={styles.articleList}>
   {
     articles.map((article) => {
-      return <Articlebox key={article.id} id={article.id} title={article.title} content={article.content} credit={article.credit} />
+      return <Articlebox key={article.id} id={article.id} title={article.title}  credit={article.credit} />
     })
   }
   </ol>

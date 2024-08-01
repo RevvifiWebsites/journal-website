@@ -14,10 +14,6 @@ export  default async function handler(
         }
     });
     if(article){
-        if(article.content){
-            res.status(200).json(article);
-        }
-        else {
             let blobs = await list({
                 prefix: `articles/${article.id}`,
                 mode: 'expanded',
@@ -25,7 +21,6 @@ export  default async function handler(
             console.log(blobs);
             let file = blobs.blobs[0];
             res.status(200).json({...article, ...{file: file } });
-        }
     }
     else {
         res.status(404).json({ message: "Article not found" });
