@@ -5,12 +5,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  let start = req.query.start as string | undefined;
+  console.log(typeof req.body);
+  let start = req.body.start as string | undefined;
   let acount = await getUser(req);
   if(acount && acount.admin){
+    console.log("start" + start);
     let article = await Prisma.article.findMany({
       skip: start ? parseInt(start) : 0,
       take: 10,
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     if (article) {
       res.status(200).json(article);
@@ -22,10 +27,12 @@ export default async function handler(
     where: {
       published: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
     skip: start ? parseInt(start) : 0,
     take: 10,
   });
-  console.log(article);
   if (article) {
     res.status(200).json(article);
   } else {

@@ -12,7 +12,6 @@ export default  function Articlebox(Article: {
     pdf.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.mjs"
      const [file, setFile] = useState(null as any);
   useEffect(() => {
-    console.log(Article.id);
     fetch("/api/getpdf?id=" + Article.id)
       .then((res) => {
         return res.json();
@@ -30,7 +29,6 @@ export default  function Articlebox(Article: {
       });
   }, []);
   useEffect(() => {
-    console.log("rann" + file);
     if (file) {
       let run = async () => {
         let c = document.getElementById("canvasdis" + Article.id) as HTMLCanvasElement;
