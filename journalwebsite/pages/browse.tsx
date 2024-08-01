@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import SideBar from "./sidebar";
+import Navigation from "./sidebar";
 import styles from "../styles/Browse.module.css";
 import Articlebox from "./articlebox";
+
 export default function Browse() {
   const [articles, setArticles] = useState([{
     id: "",
@@ -21,7 +22,7 @@ export default function Browse() {
 
   }, []);
   return <>
-  <SideBar/>
+  <Navigation/>
   <ol className={styles.articleList}>
   {
     articles.map((article) => {

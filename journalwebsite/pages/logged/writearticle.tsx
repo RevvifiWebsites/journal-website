@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "@/styles/Write.module.css";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
-import SideBar from "../sidebar";
+import Navigation from "../sidebar";
 
 export default function Home() {
   //TODO maybe save this to local storage so that it isn't lost? maybe allow draft saving?
@@ -12,6 +12,7 @@ export default function Home() {
     authors: "",
   });
   const [file, setFile] = useState(null as File | null);
+
   useEffect(() => {
     if(navigator.userAgent.indexOf("Firefox") != -1){
       let parent = document.getElementById("parentdiv");
@@ -24,33 +25,41 @@ export default function Home() {
   }, [file]);
   return (
     <div className={styles.page}>
-      <SideBar/>
-      <div className={styles.centerpage}>
-        <h1>Submit Your Research Here</h1>
+      <Navigation/>
+      <img src="/images/BG.png" className="background-image" draggable="false"/>
+      
+      <h1 className="heading-2">Submit Your Research Here</h1>
+      <div className={styles.pageContent}>
+      
+        {/* Research Title Input */}
         <div>
-          <h2 className={styles.inputtitle}> Work Title</h2>
-          <textarea
+          <h2 className="body-bold"> Work Title</h2>
+          <input
             id="title"
             placeholder="e.g The Effects of Climate Change on the Economy"
             onChange={(e) => {
               setArticle({ ...article, title: e.target.value });
             }}
             className={styles.textinput}
-          ></textarea>
+          ></input>
         </div>
+
+        {/* Authors Input */}
         <div>
-          <h2 className={styles.inputtitle}>Work Authors</h2>
-          <textarea
+          <h2 className="body-bold">Work Authors</h2>
+          <input
             id="Authors"
-            placeholder="e.g John Doe, Jane Doe"
+            placeholder="e.g John Doe, Anna Mark"
             onChange={(e) => {
               setArticle({ ...article, authors: e.target.value });
             }}
             className={styles.textinput}
-          ></textarea>
+          ></input>
         </div>
-        <h2 className={styles.leftinputtitle}>Submit Article</h2>
+        
+        <h2 className="body-bold">Submit Article</h2>
         <div>
+          {/* Selection for File or Text */}
           <div className={styles.rightcontents}>
             
           </div>
