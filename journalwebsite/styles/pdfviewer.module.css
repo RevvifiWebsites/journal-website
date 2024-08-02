@@ -1,0 +1,21 @@
+
+.canvaspdf {
+    width: 50%;
+    aspect-ratio: 210/297;
+    box-sizing: border-box;
+    border: 1px solid black ;
+}
+@media screen and (max-width: 768px) {
+    .canvaspdf {
+        width: 90vw;
+        aspect-ratio: 210/297;
+    }
+    .flexcontainer {
+        width: 100vw;
+        transform: translateX(-20px);
+    }
+
+}
+.flexcontainer {
+    width: 80vw;
+}

@@ -1,9 +1,9 @@
-
 import Image from "next/image";
 import styles from "@/styles/Write.module.css";
 import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import Navigation from "../sidebar";
+import PDFViewer from "../pdfviewer";
 
 export default function Home() {
   //TODO maybe save this to local storage so that it isn't lost? maybe allow draft saving?
@@ -14,10 +14,10 @@ export default function Home() {
   const [file, setFile] = useState(null as File | null);
 
   useEffect(() => {
-    if(navigator.userAgent.indexOf("Firefox") != -1){
+    if (navigator.userAgent.indexOf("Firefox") != -1) {
       let parent = document.getElementById("parentdiv");
       let embed = document.getElementById("embed");
-      if(parent && embed){
+      if (parent && embed) {
         parent.style.overflow = "hidden";
         embed.style.transform = "translateY(-4%)";
       }
@@ -25,12 +25,15 @@ export default function Home() {
   }, [file]);
   return (
     <div className={styles.page}>
-      <Navigation/>
-      <img src="/images/BG.png" className="background-image" draggable="false"/>
-      
+      <Navigation />
+      <img
+        src="/images/BG.png"
+        className="background-image"
+        draggable="false"
+      />
+
       <h1 className="heading-2">Submit Your Research Here</h1>
       <div className={styles.pageContent}>
-      
         {/* Research Title Input */}
         <div>
           <h2 className="body-bold"> Work Title</h2>
@@ -56,74 +59,65 @@ export default function Home() {
             className={styles.textinput}
           ></input>
         </div>
-        
+
         <h2 className="body-bold">Submit Article</h2>
         <div>
           {/* Selection for File or Text */}
-          <div className={styles.rightcontents}>
-            
-          </div>
-            <label htmlFor="file" className={styles.fileinputcont}>
-              {!file && (
-                <Image
-                  src="/fileplus.svg"
-                  width={0}
-                  height={0}
-                  className={styles.uploadicon}
-                  alt="file upload"
-                />
-              )}
-              <div className={styles.filelabel}>
-                {file
-                  ? file.name
-                  : "Drag and drop a file here or click the button below"}
-              </div>
-              <input
-                type="file"
-                id="file"
-                className={styles.fileinput}
-                onChange={(e) => {
-                  if (e.target.files) {
-                    setFile(e.target.files[0]);
-                    console.log(e.target.files[0]);
-                  }
-                }}
-                accept=".pdf"
+          <div className={styles.rightcontents}></div>
+          <label htmlFor="file" className={styles.fileinputcont}>
+            {!file && (
+              <Image
+                src="/fileplus.svg"
+                width={0}
+                height={0}
+                className={styles.uploadicon}
+                alt="file upload"
               />
-              {file ? (
-                <button
-                  className={styles.filebutton}
-                  onClick={(e) => {
-                    setFile(null);
-                  }}
-                >
-                  Clear File
-                </button>
-              ) : (
-                <div className={styles.filebutton}>Select File</div>
-              )}
-            </label>
-          
+            )}
+            <div className={styles.filelabel}>
+              {file
+                ? file.name
+                : "Drag and drop a file here or click the button below"}
+            </div>
+            <input
+              type="file"
+              id="file"
+              className={styles.fileinput}
+              onChange={(e) => {
+                if (e.target.files) {
+                  setFile(e.target.files[0]);
+                  console.log(e.target.files[0]);
+                }
+              }}
+              accept=".pdf"
+            />
+            {file ? (
+              <button
+                className={styles.filebutton}
+                onClick={(e) => {
+                  setFile(null);
+                }}
+              >
+                Clear File
+              </button>
+            ) : (
+              <div className={styles.filebutton}>Select File</div>
+            )}
+          </label>
         </div>
         <h1 className={styles.leftinputtitle}>Preview</h1>
-        {  (
-          file && (
+        {file && (
+          <PDFViewer file = {file} style = {{
 
-            <div id = "parentdiv" ><embed
-              type="application/pdf"
-              src={URL.createObjectURL(file).toString() + "#toolbar=0"}
-              className={styles.iframes}
-              id="embed"
-            ></embed></div>
-          )
-        ) }
+          }} 
+          ></PDFViewer>
+        )}
         <button
           className={styles.submitbutton}
           onClick={async (e) => {
-            if (
-              article.title == "Enter Title" || !file) {
-                return;
-              }
+            if (article.title == "Enter Title" || !file) {
+              return;
+            }
             let base64file = null;
             if (file) {
               base64file = await new Promise((resolve, reject) => {
