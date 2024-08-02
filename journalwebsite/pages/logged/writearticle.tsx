@@ -32,8 +32,8 @@ export default function Home() {
         draggable="false"
       />
 
-      <h1 className="heading-2">Submit Your Research Here</h1>
       <div className={styles.pageContent}>
+      <h1 className="heading-2">Submit Your Research Here</h1>
         {/* Research Title Input */}
         <div>
           <h2 className="body-bold"> Work Title</h2>
