@@ -57,7 +57,6 @@ export default function PDFViewer(props: {
     run();
   }, [file]);
   return (
-    
       <div id = {"pdfviewer" + id} className={style.flexcontainer}>
       </div>
   );

@@ -12,10 +12,11 @@
     }
     .flexcontainer {
         width: 100vw;
-        transform: translateX(-20px);
     }
 
 }
 .flexcontainer {
     width: 80vw;
+    overflow-y: scroll;
+    max-height: 100vh;
 }

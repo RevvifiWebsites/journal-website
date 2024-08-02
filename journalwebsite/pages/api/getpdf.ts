@@ -14,14 +14,18 @@ export  default async function handler(
         }
     });
     if(article){
-        
             let blobs = await list({
                 prefix: `articles/${article.id}`,
                 mode: 'expanded',
             });
             let file = blobs.blobs[0];
             console.log(file);
+            if(file){
             res.status(200).json({...file });
+            }
+            else {
+                res.status(404).json({ message: "No pdf found" });
+            }
     }
     else {
         res.status(404).json({ message: "Article not found" });
