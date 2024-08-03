@@ -1,5 +1,10 @@
 .articleList{
     list-style: none;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 .button {
     width: 100%;
