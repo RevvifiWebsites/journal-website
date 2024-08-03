@@ -80,10 +80,13 @@ body {
   font-family: "Plus Jakarta Sans", sans-serif;
   background-color: var(--clr-dark-2);
   color: var(--clr-light-1);
-  overflow-x: hidden;
   padding: 30px 30px 30px 60px;
 }
 
+html {
+  position: absolute;
+  overflow-x: hidden;
+}
 body {
   display: grid;
   place-items: center;

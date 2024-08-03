@@ -23,7 +23,6 @@
 .unstackedflex{
     width: 80vw;
     overflow-y: scroll;
-    max-height: 100vh;
     flex-wrap: nowrap;
 }
 .nostackedcanvas {

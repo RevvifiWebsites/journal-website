@@ -8,6 +8,7 @@ export default function PDFViewer(props: {
   numpages?: number | undefined;
   nostacked?: boolean;
   width?: string;
+  overflow?: string;
 }) {
     const numPages = props.numpages;
     const id = useId();
@@ -72,6 +73,7 @@ export default function PDFViewer(props: {
   return (
       <div id = {"pdfviewer" + id} className={props.nostacked ? style.unstackedflex :  style.flexcontainer } style={{
         width: props.width || "",
+        overflow: props.overflow || "scoll",
       }}>
       </div>
   );

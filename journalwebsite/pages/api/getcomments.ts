@@ -13,7 +13,7 @@ export default async function handler(
         articleId : id
     },
     skip: start ? parseInt(start) : 0,
-    take: amount ? parseInt(amount) : 10,
+    take: amount ? parseInt(amount) : 500,
   });
 
   if (comment) {

@@ -29,19 +29,23 @@ export default async function handler(
     }
     if(comment.upvotes.includes(user.id)){
         if(vote == 1){
-            res.status(200).json({message: "Already upvoted", upvotes: comment.upvotes, downvotes: comment.downvotes } );
-            return;
+            comment.upvotes = comment.upvotes.filter((x) => x != user.id);
+
         }
+        else {
         comment.upvotes = comment.upvotes.filter((x) => x != user.id);
         comment.downvotes.push(user.id);
+        }
     }
     else if( comment.downvotes.includes(user.id)){
         if(vote == -1){
-            res.status(200).json({message: "Already downvoted", upvotes: comment.upvotes, downvotes: comment.downvotes});
+            comment.downvotes = comment.downvotes.filter((x) => x != user.id);
             return;
         }
+        else{
         comment.downvotes = comment.downvotes.filter((x) => x != user.id);
         comment.upvotes.push(user.id);
+        }
     }
     else if(vote == 1){
         comment.upvotes.push(user.id);
