@@ -1,7 +1,12 @@
 .container {
     cursor: pointer!important;
-    width: 50vw;
+    width: 70vw;
     margin-bottom: 5vh;
+}
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90vw;
+    }
 }
 .image {
     width: 100%;
