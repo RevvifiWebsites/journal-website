@@ -83,15 +83,14 @@ body {
   padding: 30px 30px 30px 60px;
 }
 
-html {
-  position: absolute;
-  overflow-x: hidden;
-}
+
 body {
   display: grid;
   place-items: center;
 }
-
+html {
+  overflow-x: hidden;
+}
 section {
   margin: 100px 0;
 }
