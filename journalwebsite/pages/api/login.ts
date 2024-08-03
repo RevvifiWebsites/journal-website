@@ -16,7 +16,7 @@ export  default async function handler(
     let hashinput = req.body.password + user.salt;
     if (user.passwordHash && await argon2.verify(user.passwordHash, hashinput)) {
       const token = sign({ username: user.name }, process.env.JWT_SECRET as string, {  });
-      res.setHeader('Set-Cookie', [`token=${token}; HttpOnly; SameSite=Strict; Path=/`, `username=${user.name}; SameSite=Strict; Path=/`]); //IOS browsers will not send secure cookies across http even if its only sent locally for some reason. For the sake of testing on IOS ive removed it. TODO: readd secure later
+      res.setHeader('Set-Cookie', [`token=${token}; HttpOnly; SameSite=Strict; Path=/`, `username=${user.name}; SameSite=Strict; Path=/`, `id=${user.id}; Path=/`]); //IOS browsers will not send secure cookies across http even if its only sent locally for some reason. For the sake of testing on IOS ive removed it. TODO: readd secure later
       res.status(200).json({ message: "Logged in" });
     }
     else {

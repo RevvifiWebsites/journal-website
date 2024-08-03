@@ -20,3 +20,15 @@
     overflow-y: scroll;
     max-height: 100vh;
 }
+.unstackedflex{
+    width: 80vw;
+    overflow-y: scroll;
+    max-height: 100vh;
+    flex-wrap: nowrap;
+}
+.nostackedcanvas {
+    width: 100%;
+    aspect-ratio: 210/297;
+    box-sizing: border-box;
+    border: 1px solid black ;
+}

@@ -13,8 +13,8 @@ export default async function handler(
     }
     let id = req.body.id as string;
     let vote = req.body.vote as number;
-    console.log(typeof(vote));
     if(vote != 1 && vote != -1){
+        console.log(vote);
         res.status(400).json({message: "Invalid vote"});
         return;
     }
@@ -27,64 +27,36 @@ export default async function handler(
         res.status(404).json({message: "Comment not found"});
         return;
     }
-    if(comment.upvotes.indexOf(user.id) != -1 ){
-        if(vote == 1) {
-            res.status(400).json({message: "Already voted"});
+    if(comment.upvotes.includes(user.id)){
+        if(vote == 1){
+            res.status(200).json({message: "Already upvoted", upvotes: comment.upvotes, downvotes: comment.downvotes } );
             return;
         }
-        else {
-            await Prisma.comment.update({
-                where: {
-                    id: id,
-                },
-                data: {
-                    upvotes: {
-                        set: comment.upvotes.filter((x) => x != user.id),
-                    },
-                },
-            });
-        }
+        comment.upvotes = comment.upvotes.filter((x) => x != user.id);
+        comment.downvotes.push(user.id);
     }
-    else if(comment.downvotes.indexOf(user.id) != -1 ){
-        if(vote == -1) {
-            res.status(400).json({message: "Already voted"});
+    else if( comment.downvotes.includes(user.id)){
+        if(vote == -1){
+            res.status(200).json({message: "Already downvoted", upvotes: comment.upvotes, downvotes: comment.downvotes});
             return;
         }
-        else {
-            await Prisma.comment.update({
-                where: {
-                    id: id,
-                },
-                data: {
-                    upvotes: {
-                        set: comment.upvotes.filter((x) => x != user.id),
-                    },
-                },
-            });
-        }
+        comment.downvotes = comment.downvotes.filter((x) => x != user.id);
+        comment.upvotes.push(user.id);
     }
     else if(vote == 1){
-        await Prisma.comment.update({
-            where: {
-                id: id,
-            },
-            data: {
-                upvotes: {
-                    push: user.id,
-                },
-            },
-        });
-    } else {
-        await Prisma.comment.update({
-            where: {
-                id: id,
-            },
-            data: {
-                downvotes: {
-                    push: user.id,
-                },
-            },
-        });
+        comment.upvotes.push(user.id);
     }
-    res.status(200).json({message: "Vote recorded"});
+    else{
+        comment.downvotes.push(user.id);
+    }
+    comment = await Prisma.comment.update({
+        where: {
+            id: id,
+        },
+        data: {
+            upvotes: comment.upvotes,
+            downvotes: comment.downvotes,
+        },
+    });
+    res.status(200).json({message: "Vote recorded", upvotes: comment.upvotes, downvotes: comment.downvotes});
 }

@@ -1,12 +1,50 @@
+
 import { useRouter } from "next/router";
 
 import { useEffect, useState } from "react";
-import Markdown from "react-markdown";
 import SideBar from "../sidebar";
+import style from "../../styles/Read.module.css";
+import PDFViewer from "../pdfviewer";
 
 export default function Home() {
+  async function vote(commentid: string, vote: number) {
+    fetch(`/api/votecomment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: commentid,
+        vote: vote,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        else if(res.status == 401){
+          //todo loging popup?
+          window.location.href = "/login";
+        }
+        else if(res.status == 400){
+          return res.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        let newcomments = comments.map((x) => {
+          if (x.id == commentid) {
+            return { ...x, upvotes: data.upvotes, downvotes: data.downvotes };
+          }
+          return x;
+        });
+      setComments(newcomments);
+      });
+      let selfid = document.cookie.split(";").find((x) => x.includes("id="))?.split("=")[1];
+      console.log(selfid)
+  }
   const [pdffile, setPdfFile] = useState({} as any);
-
+  const [myid, setId] = useState("");
   const [article, setArticle] = useState({
     title: "Loading...",
     content: "",
@@ -15,6 +53,7 @@ export default function Home() {
       url: string;
     } | null,
     published: true,
+    createdAt: "Loading...",
   });
   const router = useRouter();
   const [comments, setComments] = useState([
@@ -24,12 +63,12 @@ export default function Home() {
       id: "Loading...",
       downvotes: [""],
       upvotes: [""],
-      
     },
   ]);
   const [comment, setComment] = useState("");
   const { id } = router.query;
   useEffect(() => {
+    setId(document.cookie.split(";").find((x) => x.includes("id="))?.split("=")[1] || "");
     if (id == undefined) {
       return;
     }
@@ -73,87 +112,30 @@ export default function Home() {
       });
   }, [id]);
   return (
-    <>
+    <div className= {style.page}>
     <SideBar></SideBar>
-      {!article.published && <div>
+      {!article.published && <div className= {style.publishedpopup}>
         This article is not yet published. It will not be discoverable to others untill it has been approved </div>}
-      {article.title}
-      <h2>By {article.credit}</h2>
-      <Markdown>{article.content}</Markdown>
-      {article.file && pdffile && <embed src = {"data:application/pdf;base64," + pdffile} type="application/pdf"  ></embed>}
+      <h1 className={style.title}>{article.title}</h1>
+      <h2 className={style.credits}>By:  {article.credit} |  {" " + new Date(article.createdAt).toLocaleString() }</h2>
+      <hr></hr>
+      {  (<PDFViewer style = {{
+}}file={pdffile} nostacked width= "60%" ></PDFViewer>)}
       <br></br>
       <hr></hr>
       {comments.map((comment) => {
         console.log(comment);
         return (
           <div>
-            <h3>{comment.authorName}</h3>
-            <p>{comment.content}</p>
+            <h3 className= {style.commentauth}>{comment.authorName}</h3>
+            <p className= {style.commenttext}>{comment.content}</p>
             <p>{comment.upvotes.length - comment.downvotes.length}</p>
-            <button
-              onClick={() => {
-                fetch(`/api/votecomment`, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    id: comment.id,
-                    vote: 1,
-                  }),
-                })
-                  .then((res) => {
-                    if (!res.ok) {
-                      return res.json();
-                    } else {
-                      let newcomments = comments.map((c) => {
-                        if (c.id == comment.id) {
-                          c.upvotes.push("1");
-                        }
-                        return c;
-                      });
-                      setComments(newcomments);
-                    }
-                  })
-                  .then((data) => {
-                    console.log(data);
-                  });
-              }}
-            >
-              Upvote
-            </button>
-            <button
-              onClick={() => {
-                fetch(`/api/votecomment`, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    id: comment.id,
-                    vote: -1,
-                  }),
-                })
-                  .then((res) => {
-                    if (!res.ok) {
-                      return res.json();
-                    } else {
-                      let newcomments = comments.map((c) => {
-                        if (c.id == comment.id) {
-                          c.downvotes.push("1");
-                        }
-                        return c;
-                      });
-                      setComments(newcomments);
-                    }
-                  })
-                  .then((data) => {
-                    console.log(data);
-                  });
-              }}
-            >
-              Downvote
-            </button>
+            <button className= {comment.upvotes.includes(myid) ? style.clickedbutton : style.unclickedbutton} onClick={() => {
+              vote(comment.id, 1);
+            } }>upvote</button>
+            <button className= {comment.downvotes.includes(myid) ? style.clickedbutton : style.unclickedbutton} onClick={() => {
+              vote(comment.id, -1);
+            } }>downvote</button>
           </div>
         );
       })}
@@ -201,6 +183,6 @@ export default function Home() {
       >
         Add Comment
       </button>
-    </>
+    </div>
   );
 }
