@@ -83,10 +83,11 @@ body {
   padding: 30px 30px 30px 60px;
 }
 
-
 body {
   display: grid;
   place-items: center;
+  background-image: url("/images/BG.png");
+  background-repeat: no-repeat;
 }
 html {
   overflow-x: hidden;

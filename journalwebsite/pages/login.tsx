@@ -2,16 +2,16 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Login.module.css";
 import { useState } from "react";
-import SideBar from "./sidebar";
+import Navigation from "./sidebar";
 
 export default function Login() {
   const [message, setMSG] = useState("");
   return (
     <div className={styles.container}>
-      <SideBar />
-      <img src="/images/BG.png" className="background-image" />
+      <Navigation />
+      {/* <img src="/images/BG.png" className="background-image" /> */}
       <h1>{message}</h1>
-      <h2 className="heading-2">Sign Up to <span className="accent-color">young</span>minds.</h2>
+      <h2 className="heading-2">Login to <span className="accent-color">young</span>minds.</h2>
       <input type="text" placeholder="Enter Username" id="username"/>
       <input type="password" placeholder="Enter Password" id="password"/>
 
