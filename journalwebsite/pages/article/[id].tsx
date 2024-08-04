@@ -92,6 +92,7 @@ export default function Home() {
       createdAt: "",
     },
   ]);
+  const [opencomment, setOpenComment] = useState(false);
   const [comment, setComment] = useState("");
   const { id } = router.query;
   useEffect(() => {
@@ -168,10 +169,26 @@ export default function Home() {
             overflow="visible"
           ></PDFViewer>
         }
-        <div className={style.commentcontainer}>
+        <button className={`${style.commentopenbutton} ${opencomment ? style.hiddencomment : ""} `} onClick={() => {
+          setOpenComment(!opencomment);
+        }}>
+          <Image
+            src="/icons/comment.svg"
+            width="25"
+            height="25"
+            alt="comment"
+            ></Image>
+        </button>
+        <div className={` ${style.commentcontainer} ${opencomment ? style.opencomment : style.hiddencomment}` }>
+          <div className={style.commentviewbutton} onClick={
+            () => {
+              setOpenComment(!opencomment);
+            }
+          }>
+            X
+            </div>
           <div className={style.commentlist}>
             {comments.map((comment) => {
-   
               return (
                 <div className={style.comment}>
                   <p className={style.commentauth}>

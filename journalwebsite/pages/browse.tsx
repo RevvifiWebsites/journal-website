@@ -31,7 +31,6 @@ export default function Browse() {
   }
   </ol>
   <button onClick={() => {
-    console.log(articles.length);
     setFetching(true);
     fetch("/api/getarticlelist", {
       headers: {

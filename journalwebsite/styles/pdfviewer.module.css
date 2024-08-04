@@ -31,3 +31,15 @@
     box-sizing: border-box;
     border: 1px solid black ;
 }
+@media screen and (max-width: 768px) {
+    .nostackedcanvas {
+        width: 100vw;
+        
+        aspect-ratio: 210/297;
+    }
+    .flexcontainer {
+        width: 100vw;
+        position: absolute;
+        left: 0;
+    }
+}

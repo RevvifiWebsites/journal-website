@@ -131,3 +131,55 @@
     height: 5vh;
     background: transparent;
 }
+.commentviewbutton {
+    display: none;
+}
+.commentopenbutton {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .commentviewbutton {
+        display: block;
+        position: absolute;
+        right: 5px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 2rem;
+    }
+    .commentcontainer {
+        width: 90vw;
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .hiddencomment {
+        display: none!important;
+    }
+    .commentopenbutton {
+        display: block;
+        position: fixed;
+        right: 5px;
+        background: #FD7E14;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        bottom: 5%;
+    }
+    .commentlist {
+        padding-left: 5%;
+    }
+    .commentcontainer hr {
+        display: none;
+
+    }
+    .page {
+        position: absolute;
+        left: 0;
+    }
+    .page h1, .page p, .page h2{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
