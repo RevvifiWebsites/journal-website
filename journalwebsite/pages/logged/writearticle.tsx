@@ -33,7 +33,7 @@ export default function Home() {
       />
 
       <div className={styles.pageContent}>
-      <h1 className="heading-2">Submit Your Research Here</h1>
+        <h1 className="heading-2">Submit Your Research Here</h1>
         {/* Research Title Input */}
         <div>
           <h2 className="body-bold"> Work Title</h2>
@@ -83,13 +83,53 @@ export default function Home() {
               type="file"
               id="file"
               className={styles.fileinput}
-              onChange={(e) => {
+              onChange={async (e) => {
                 if (e.target.files) {
-                  setFile(e.target.files[0]);
-                  console.log(e.target.files[0]);
+                  if (
+                    e.target.files[0].type.indexOf("msword") != -1 ||
+                    e.target.files[0].type.indexOf("officedocument") != -1
+                  ) {
+                    console.log(e.target.files[0]);
+                    if (
+                      e.target.files[0].size > 10000000 ||
+                      e.target.files == null
+                    ) {
+                      return;
+                    }
+                    const base64file = await new Promise((resolve, reject) => {
+                      const reader = new FileReader();
+                      reader.onload = () => {
+                        resolve(
+                          (reader.result as string).replace(
+                            /^data:.+;base64,/,
+                            ""
+                          )
+                        );
+                      };
+                      if (e.target.files) {
+                        reader.readAsDataURL(e.target.files[0]);
+                      }
+                    });
+                    const res = await fetch("/api/convertdoc", {
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      method: "POST",
+                      body: JSON.stringify({
+                        file: base64file,
+                      }),
+                    }).then((res) => res.text());
+                    setFile(
+                      new File([Buffer.from(res, "base64")], e.target.files[0].name + ".pdf", {
+                        type: "application/pdf",
+                      })
+                    );
+                  } else {
+                    setFile(e.target.files[0]);
+                  }
                 }
               }}
-              accept=".pdf"
+              accept=".pdf, .doc, .docx"
             />
             {file ? (
               <button
@@ -106,12 +146,7 @@ export default function Home() {
           </label>
         </div>
         <h1 className={styles.leftinputtitle}>Preview</h1>
-        {file && (
-          <PDFViewer file = {file} style = {{
-
-          }} 
-          ></PDFViewer>
-        )}
+        {file && <PDFViewer file={file} style={{}}></PDFViewer>}
         <button
           className={styles.submitbutton}
           onClick={async (e) => {
