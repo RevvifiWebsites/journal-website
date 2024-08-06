@@ -10,7 +10,7 @@ import styles from "../styles/Index.module.css"
 export default function Home() {
   return (
     <div className={styles.container}>
-      <img src="/images/BG.png" className="background-image" draggable="false"/>
+      {/* <img src="/images/BG.png" className="background-image" draggable="false"/> */}
       {/* <div className={styles.sidebar}></div> */}
       <Navigation/>
       <div className={styles.hero}>
