@@ -204,7 +204,45 @@ export default function Home() {
         }}
       >
         Delete
-      </button></>
+      </button> 
+      {!article.published && <button
+        className={style.featurebutton}
+        onClick={async () => {
+          if (window.confirm("Are you sure you want to publish this article?")) {
+            fetch(`/api/publisharticle`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id: id,
+              }),
+            });
+          }
+        }}
+      >
+        Publish
+      </button>}
+      {article.published && <button
+        className={style.featurebutton}
+        onClick={async () => {
+          if (window.confirm("Are you sure you want to unpublish this article?")) {
+            fetch(`/api/publisharticle`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id: id,
+                unpublish: true,
+              }),
+            });
+          }
+        }}
+      >
+        Unpublish
+      </button>}
+      </>
       )}
       <hr></hr>
       <div className={style.readercont}>

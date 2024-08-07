@@ -1,6 +1,7 @@
 .container {
   display: flex;
   gap: 25px;
+  min-width: 40vw
 }
 
 .container > img {

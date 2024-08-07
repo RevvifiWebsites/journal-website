@@ -20,6 +20,7 @@ model Article {
   type     String @default("pdf")
   comments  Comment[]
   featured  Boolean @default(false)
+  funfacts  FunFact[]
 }
 model Comment{
   id        String     @default(cuid()) @id
@@ -46,7 +47,17 @@ model User {
   posts         Article[]
   admin        Boolean    @default(false)
   comments     Comment[]
+  funfacts     FunFact[]
   @@map(name: "users")
   @@unique([id, name])
 }
-model funfact
+
+model FunFact {
+  id       String     @default(cuid()) @id
+  content  String
+  author   User?   @relation(fields: [authorId], references: [id])
+  authorId String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  Article   Article? @relation(fields: [articleId], references: [id])
+  articleId String?
+}

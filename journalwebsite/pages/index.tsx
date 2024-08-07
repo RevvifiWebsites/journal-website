@@ -21,6 +21,7 @@ export default function Home() {
     credit: string;
     createdAt: string;
   }[]);
+
   useEffect(() => {
     fetch("/api/getfeature", { 
       method: "POST",

@@ -11,18 +11,9 @@ export default function Home() {
     title: "Enter Title",
     authors: "",
   });
-  const [file, setFile] = useState(null as File | null);
 
-  useEffect(() => {
-    if (navigator.userAgent.indexOf("Firefox") != -1) {
-      let parent = document.getElementById("parentdiv");
-      let embed = document.getElementById("embed");
-      if (parent && embed) {
-        parent.style.overflow = "hidden";
-        embed.style.transform = "translateY(-4%)";
-      }
-    }
-  }, [file]);
+  const [numfacts, setNumFacts] = useState(1);
+  const [file, setFile] = useState(null as File | null);
   return (
     <div className={styles.page}>
       <Navigation />
@@ -59,7 +50,47 @@ export default function Home() {
             className={styles.textinput}
           ></input>
         </div>
+        <div>
+          <h2 className="body-bold"> Attach Fun Facts</h2>
+          <ol id="submmitedfacts" className={styles.factslist}>
+            {Array.from({ length: numfacts }).map((_, i) => (
+              <li key={i} className = {
+                styles.factslistitem
+              }>
+                <input
+                  placeholder="Enter Fun Fact"
+                  className={styles.textinput}
+                ></input>
+                <button
+                  className={styles.removebutton}
+                  onClick={(e) => {
+                    const targetElement = e.target as HTMLElement;
+                    const list =
+                      targetElement.parentElement?.parentElement?.children;
+                    if (list) {
+                      for (let i = 0; i < list?.length; i++) {
+                        if (list[i] == targetElement.parentElement) {
+                          list[i].remove();
+                        }
+                      }
+                    }
+                  }}
+                >
+                  X
+                </button>
+              </li>
+            ))}
+          </ol>
 
+          <button
+            className={styles.submitbutton}
+            onClick={(e) => {
+              setNumFacts(numfacts + 1);
+            }}
+          >
+            Add Fun Fact
+          </button>
+        </div>
         <h2 className="body-bold">Submit Article</h2>
         <div>
           {/* Selection for File or Text */}
@@ -120,9 +151,13 @@ export default function Home() {
                       }),
                     }).then((res) => res.text());
                     setFile(
-                      new File([Buffer.from(res, "base64")], e.target.files[0].name + ".pdf", {
-                        type: "application/pdf",
-                      })
+                      new File(
+                        [Buffer.from(res, "base64")],
+                        e.target.files[0].name + ".pdf",
+                        {
+                          type: "application/pdf",
+                        }
+                      )
                     );
                   } else {
                     setFile(e.target.files[0]);
@@ -145,6 +180,7 @@ export default function Home() {
             )}
           </label>
         </div>
+
         <h1 className={styles.leftinputtitle}>Preview</h1>
         {file && <PDFViewer file={file} style={{}}></PDFViewer>}
         <button
@@ -165,6 +201,13 @@ export default function Home() {
                 reader.readAsDataURL(file);
               });
             }
+            let funfacts = [];
+            const factlist = document.getElementById("submmitedfacts") 
+            if(factlist != null){
+            for(let i = 0; i <factlist.children.length; i++){
+              funfacts.push((factlist.children[i].children[0] as HTMLInputElement).value)
+            }
+          }
             const res = await fetch("/api/addarticle", {
               method: "POST",
               body: JSON.stringify({
@@ -174,6 +217,8 @@ export default function Home() {
                   filename: file ? file.name : null,
                   filetype: file ? file.type : null,
                 },
+                funfacts: funfacts
+                  ,
               }),
               headers: {
                 "Content-Type": "application/json",

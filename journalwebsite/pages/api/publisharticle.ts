@@ -16,7 +16,7 @@ export default async function handler(
             id: id,
         },
         data: {
-            published: true,
+            published: req.body.unpublish ? false : true,
         },
     });
     res.status(200).json({message: "Article published"});

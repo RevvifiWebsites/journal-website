@@ -27,6 +27,18 @@ export  default async function handler(
                 access: 'public',
                 contentType: "application/pdf"
               });
+              if(req.body.funfacts){
+                console.log(req.body.funfacts);
+                for(let fact of req.body.funfacts){
+                    await Prisma.funFact.create({
+                        data: {
+                            articleId: article.id,
+                            authorId: user.id,
+                            content: fact,
+                        }
+                    });
+                }
+              }
         res.status(200).json({ message: "Article created",  id:  article.id });
     }
     else {
