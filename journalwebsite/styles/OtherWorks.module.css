@@ -29,3 +29,24 @@
     width: 100%;
   }
 }
+.pdfcanvas {
+  width: 10vw;
+  height: 10vh;
+}
+
+.pdfviewer{
+  width: 10vw;
+}
+@media screen and (max-width: 768px) {
+  .pdfcanvas {
+    width: 90vw;
+    height: 10vh;
+  }
+  .pdfviewer{
+    width: 90vw;
+  }
+  .pdfview {
+    width: 90vw;
+    height: 10vh;
+  }
+}

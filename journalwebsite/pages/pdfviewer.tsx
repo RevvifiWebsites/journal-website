@@ -1,20 +1,22 @@
 import * as pdf from "pdfjs-dist";
 import style from "../styles/pdfviewer.module.css";
 import { useEffect, useId, useState } from "react";
-
+//absolute abomination of a module, I highly recommend not messing too hard with all the weird props
 export default function PDFViewer(props: {
   file: string | File;
-  style: any;//depercated do not use this
+  style?: any;
   numpages?: number | undefined;
   nostacked?: boolean;
   width?: string;
   overflow?: string;
+  contstile?: any;
+  canvasstyle?: any;
 }) {
     const numPages = props.numpages;
     const id = useId();
   const [file, setFile] = useState("");
   pdf.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.mjs";
+    "/pdf.worker.mjs";
   useEffect(() => {
     async function run() {
       if (props.file instanceof File) {
@@ -54,11 +56,10 @@ export default function PDFViewer(props: {
           let c = document.createElement("canvas");
           box.appendChild(c);
           c.getContext("2d")?.scale(dpi, dpi);
-          c.className = props.nostacked ? style.nostackedcanvas : style.canvaspdf;
+          c.className = ` ${props.nostacked ? style.nostackedcanvas : style.canvaspdf}  ${props.canvasstyle}`;
           c.width = 800 * dpi;
           c.height = 1000 * dpi;
           let page = await completed.getPage(i);
-          let scale = 1;
           const viewport = page.getViewport({scale: c.height / page.getViewport({scale: 1}).height});
           await page.render({
             canvasContext: c.getContext("2d") as any,
@@ -71,7 +72,7 @@ export default function PDFViewer(props: {
     run();
   }, [file]);
   return (
-      <div id = {"pdfviewer" + id} className={props.nostacked ? style.unstackedflex :  style.flexcontainer } style={{
+      <div id = {"pdfviewer" + id} className={` ${props.nostacked ? style.unstackedflex :  style.flexcontainer} ${props.contstile}` } style={{
         width: props.width || "",
         overflow: props.overflow || "scoll",
       }}>

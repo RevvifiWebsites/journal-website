@@ -19,6 +19,7 @@ model Article {
   credit    String?
   type     String @default("pdf")
   comments  Comment[]
+  featured  Boolean @default(false)
 }
 model Comment{
   id        String     @default(cuid()) @id

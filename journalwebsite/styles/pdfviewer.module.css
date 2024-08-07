@@ -4,6 +4,7 @@
     aspect-ratio: 210/297;
     box-sizing: border-box;
     border: 1px solid black ;
+    border-radius: 20px;
 }
 @media screen and (max-width: 768px) {
     .canvaspdf {
@@ -34,12 +35,14 @@
 @media screen and (max-width: 768px) {
     .nostackedcanvas {
         width: 100vw;
-        
+        height: 30vh;
         aspect-ratio: 210/297;
     }
     .flexcontainer {
+        
         width: 100vw;
         position: absolute;
         left: 0;
+        height: 30vh;
     }
 }

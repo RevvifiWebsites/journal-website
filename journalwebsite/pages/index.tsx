@@ -6,8 +6,49 @@ import FeaturedWork from "./FeaturedWork";
 import OtherWorks from "./OtherWorks";
 import FunFacts from "./FunFacts";
 import styles from "../styles/Index.module.css"
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [articles, setArticles] = useState([] as {
+    id: string;
+    title: string;
+    credit: string;
+    createdAt: string;
+  }[]);
+  const [featuredArticles, setFeaturedArticles] = useState([] as {
+    id: string;
+    title: string;
+    credit: string;
+    createdAt: string;
+  }[]);
+  useEffect(() => {
+    fetch("/api/getfeature", { 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        start: 0,
+        take: 3,
+      }),
+    }).then((res) => res.json()).then((data) => {
+      console.log(data);
+      setFeaturedArticles(data);
+    });
+    fetch("/api/getarticlelist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        start: 0,
+        take: 5,
+      }),
+    }).then((res) => res.json()).then((data) => {
+      setArticles(data);
+    });
+    }
+  , []);
   return (
     <div className={styles.container}>
       {/* <img src="/images/BG.png" className="background-image" draggable="false"/> */}
@@ -19,9 +60,10 @@ export default function Home() {
         <p className="body-regular">Here high-school and college students can share their scientific research in English or Russian. They can also exchange ideas and opinions</p>
         <div className={styles.buttonContainer}>
           <button className="button-primary"><a href="/login">Sign Up</a></button>
-          <button className="button-secondary">View Featured 🠇</button>
+          <button className="button-secondary" onClick={ () => {
+            window.scrollTo({top: document.getElementById("featured")?.getBoundingClientRect().top, behavior: 'smooth'});
+          }}>View Featured 🠇</button>
         </div>
-        
         </div>
 
         <div className={styles.heroRight}>
@@ -60,7 +102,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
       <div className={styles.uniList}>
         <img src="/icons/penn.svg" draggable="false"/>
         <img src="/icons/duke.svg" draggable="false"/>
@@ -69,35 +110,15 @@ export default function Home() {
         <img src="/icons/stanford.svg" draggable="false"/>
         <img src="/icons/lseps.svg" draggable="false"/>
       </div>
-
-      <section className={styles.fw}>
+      <section className={styles.fw} id = "featured">
         <img className={styles.backgroundImage} src="/images/BG2.png" />
         <h2 className="heading-2">Featured Work</h2>
         <div className={styles.featuredWorkContainer}>
-          <FeaturedWork
-            image="/images/fw-1.png"
-            title="Mechanistic Deconvolution of Autoreduction in Tetrazolium-Based CellViability Assays"
-            authorName="Tran et al."
-            publishDate="July 15th, 2024"
-            views="222"
-            tags={['Redox Reactions', 'Mass Spectroscopy', 'Formazan']}
-          />
-          <FeaturedWork
-            image="/images/fw-2.png"
-            title="Using Gravitational Waves to Determine if Primordial Black Holes are Sources of Dark Matter"
-            authorName="Tran et al."
-            publishDate="July 15th, 2024"
-            views="222"
-            tags={['Redox Reactions', 'Mass Spectroscopy', 'Formazan']}
-          />
-          <FeaturedWork
-            image="/images/fw-3.png"
-            title="Optical anisotropy of crystallized vanillin thin film: the science behind the art"
-            authorName="Tran et al."
-            publishDate="July 15th, 2024"
-            views="222"
-            tags={['Redox Reactions', 'Mass Spectroscopy', 'Formazan']}
-          />
+          {
+            featuredArticles.map((article) => {
+              return <FeaturedWork key={article.id} id={article.id} title={article.title} credit= {article.credit} createdAt = {article.createdAt }/>
+            })
+          }
         </div>
       </section>
 
@@ -105,51 +126,22 @@ export default function Home() {
         <div className={styles.otherWorksContainer}>
           <div className={styles.otherWorksHeading}>
             <h2 className="heading-2">Other Works</h2>
-            <p>View all</p>
+            <a href = "/browse">View all</a>
           </div>
-          <OtherWorks
-            image="/images/fw-1.png"
-            title="Optical anisotropy of crystallized vanillin thin film: the science behind the art"
-            authorName="Tran et al."
-            publishDate="July 15th, 2024"
-            views="222"
-            tags={['Redox Reactions', 'Mass Spectroscopy', 'Formazan']}
-          />
-          <OtherWorks
-            image="/images/fw-2.png"
-            title="Confrontation  of Powers in the Norman Kingdom of Sicily: Kings, Nobles, Bureaucrats  and Cities, Citta e vita cittadina nei Paesi dell'area mediterranea:  secoli XI-XV, Atti del Convegno Internazionale in onore di Salvatore  Tramontana, a cura di B. Saitta (Roma, Viella, 2006), pp. 541-552."
-            authorName="Tran et al."
-            publishDate="July 15th, 2024"
-            views="222"
-            tags={['Redox Reactions', 'Mass Spectroscopy', 'Formazan']}
-          />
-          <OtherWorks
-            image="/images/fw-3.png"
-            title="Optical anisotropy of crystallized vanillin thin film: the science behind the art"
-            authorName="Tran et al."
-            publishDate="July 15th, 2024"
-            views="222"
-            tags={['Redox Reactions', 'Mass Spectroscopy', 'Formazan']}
-          />
-          <OtherWorks
-            image="/images/fw-1.png"
-            title="Optical anisotropy of crystallized vanillin thin film: the science behind the art"
-            authorName="Tran et al."
-            publishDate="July 15th, 2024"
-            views="222"
-            tags={['Redox Reactions', 'Mass Spectroscopy', 'Formazan']}
-          />
+            {
+              articles.map((article) => {
+                return <OtherWorks key={article.id} id={article.id} title={article.title} credit= {article.credit} createdAt = {article.createdAt }/>
+              })
+            }
         </div>
         <FunFacts/>
       </div>
-      
       <footer>
         <img className={styles.footerCurve} src="/images/footerCurve.png" />
         <div className={styles.footerContent}>
           <h2 className="heading-2">Today could be the best day of your (research) life</h2>
           <button className="button-primary"><a href="/login">Sign Up</a></button>
         </div>
-        
         <div className={styles.footerBottom}>
           <p className="body-secondary">Copyright © 2024 YoundMinds, All Rights Reserved</p>
           <p className="body-secondary">Terms & Conditions<span>Privacy Policy</span></p>

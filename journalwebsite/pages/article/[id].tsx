@@ -69,6 +69,7 @@ export default function Home() {
       ?.split("=")[1];
     console.log(selfid);
   }
+  const [admin, setAdmin] = useState(false);
   const [pdffile, setPdfFile] = useState({} as any);
   const [myid, setId] = useState("");
   const [article, setArticle] = useState({
@@ -96,6 +97,17 @@ export default function Home() {
   const [comment, setComment] = useState("");
   const { id } = router.query;
   useEffect(() => {
+    fetch("/api/getuser", {})
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        if (data.admin) {
+          setAdmin(true);
+        }
+      });
     setId(
       document.cookie
         .split(";")
@@ -138,7 +150,6 @@ export default function Home() {
               }
             })
             .then((data) => {
-
               setPdfFile(data);
             });
         }
@@ -158,6 +169,43 @@ export default function Home() {
         By: {article.credit} |{" "}
         {" " + new Date(article.createdAt).toLocaleString()}
       </h2>
+      {admin && (
+        <><button
+          className={style.featurebutton}
+          onClick={() => {
+            fetch(`/api/featurearticle`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id: id,
+              }),
+            });
+          }}
+        >
+          Feature
+        </button>
+
+      <button
+        className={style.featurebutton}
+        onClick={async () => {
+          if (window.confirm("Are you sure you want to delete this article?")) {
+            fetch(`/api/featurearticle`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                id: id,
+              }),
+            });
+          }
+        }}
+      >
+        Delete
+      </button></>
+      )}
       <hr></hr>
       <div className={style.readercont}>
         {
@@ -169,24 +217,34 @@ export default function Home() {
             overflow="visible"
           ></PDFViewer>
         }
-        <button className={`${style.commentopenbutton} ${opencomment ? style.hiddencomment : ""} `} onClick={() => {
-          setOpenComment(!opencomment);
-        }}>
+        <button
+          className={`${style.commentopenbutton} ${
+            opencomment ? style.hiddencomment : ""
+          } `}
+          onClick={() => {
+            setOpenComment(!opencomment);
+          }}
+        >
           <Image
             src="/icons/comment.svg"
             width="25"
             height="25"
             alt="comment"
-            ></Image>
+          ></Image>
         </button>
-        <div className={` ${style.commentcontainer} ${opencomment ? style.opencomment : style.hiddencomment}` }>
-          <div className={style.commentviewbutton} onClick={
-            () => {
+        <div
+          className={` ${style.commentcontainer} ${
+            opencomment ? style.opencomment : style.hiddencomment
+          }`}
+        >
+          <div
+            className={style.commentviewbutton}
+            onClick={() => {
               setOpenComment(!opencomment);
-            }
-          }>
+            }}
+          >
             X
-            </div>
+          </div>
           <div className={style.commentlist}>
             {comments.map((comment) => {
               return (
@@ -248,25 +306,27 @@ export default function Home() {
               );
             })}
           </div>
-          <hr className= {
-            style.commenthr
-          }></hr>
+          <hr className={style.commenthr}></hr>
           <textarea
-          id = "commentbox"
+            id="commentbox"
             placeholder="add comment"
             onChange={(e) => {
               setComment(e.target.value);
             }}
-          > </textarea>
-          <button className= {style.addcomment}
+          >
+            {" "}
+          </textarea>
+          <button
+            className={style.addcomment}
             onClick={() => {
               if (document.cookie.indexOf("token") != -1) {
-
                 //todo add login popup?
                 return;
               }
               setComment("");
-              (document.getElementById("commentbox") as HTMLTextAreaElement).value = "";
+              (
+                document.getElementById("commentbox") as HTMLTextAreaElement
+              ).value = "";
               fetch(`/api/addcomment`, {
                 method: "POST",
                 headers: {
@@ -297,7 +357,12 @@ export default function Home() {
                 });
             }}
           >
-            <Image src="/icons/send.svg" width="35" height="35" alt = "send"></Image>
+            <Image
+              src="/icons/send.svg"
+              width="35"
+              height="35"
+              alt="send"
+            ></Image>
           </button>
         </div>
       </div>
