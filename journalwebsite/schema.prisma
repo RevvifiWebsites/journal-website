@@ -49,3 +49,4 @@ model User {
   @@map(name: "users")
   @@unique([id, name])
 }
+model funfact
