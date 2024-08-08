@@ -265,8 +265,8 @@ export default function Home() {
         >
           <Image
             src="/icons/comment.svg"
-            width="25"
-            height="25"
+            width="20"
+            height="20"
             alt="comment"
           ></Image>
         </button>
@@ -344,10 +344,10 @@ export default function Home() {
               );
             })}
           </div>
-          <hr className={style.commenthr}></hr>
+          {/* <hr className={style.commenthr}></hr> */}
           <textarea
             id="commentbox"
-            placeholder="add comment"
+            placeholder="Add Comment"
             onChange={(e) => {
               setComment(e.target.value);
             }}
@@ -397,8 +397,8 @@ export default function Home() {
           >
             <Image
               src="/icons/send.svg"
-              width="35"
-              height="35"
+              width="24"
+              height="24"
               alt="send"
             ></Image>
           </button>
