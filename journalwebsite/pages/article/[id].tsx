@@ -161,7 +161,7 @@ export default function Home() {
       {!article.published && (
         <div className={style.publishedpopup}>
           This article is not yet published. It will not be discoverable to
-          others untill it has been approved{" "}
+          others until it has been approved{" "}
         </div>
       )}
       <h1 className="heading-2">{article.title}</h1>

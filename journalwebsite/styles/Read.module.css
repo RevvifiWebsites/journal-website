@@ -30,6 +30,11 @@
   box-shadow: -5px 0px 3px -1px #fd7e14, 5px 0px 3px -1px #fd7e14;
 }
 
+.page h1,
+.page h2 {
+  margin-left: 10px;
+}
+
 .commentcontainer h3 {
   margin-bottom: 20px;
 }
