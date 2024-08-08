@@ -275,13 +275,14 @@ export default function Home() {
             opencomment ? style.opencomment : style.hiddencomment
           }`}
         >
+          <h3 className="heading-3">Comments</h3>
           <div
             className={style.commentviewbutton}
             onClick={() => {
               setOpenComment(!opencomment);
             }}
           >
-            X
+            x
           </div>
           <div className={style.commentlist}>
             {comments.map((comment) => {
@@ -344,7 +345,7 @@ export default function Home() {
               );
             })}
           </div>
-          <hr className={style.commenthr}></hr>
+          {/* <hr className={style.commenthr}></hr> */}
           <textarea
             id="commentbox"
             placeholder="Add Comment"

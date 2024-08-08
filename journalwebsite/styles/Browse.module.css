@@ -1,6 +1,7 @@
 .container {
   display: flex;
   gap: 70px;
+  /* flex-wrap: wrap; */
 }
 
 .articleList {
@@ -24,4 +25,12 @@
 .button:hover {
   background-color: #fffff0;
   color: #fd7e14;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 }
