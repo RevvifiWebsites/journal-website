@@ -344,7 +344,7 @@ export default function Home() {
               );
             })}
           </div>
-          {/* <hr className={style.commenthr}></hr> */}
+          <hr className={style.commenthr}></hr>
           <textarea
             id="commentbox"
             placeholder="Add Comment"
