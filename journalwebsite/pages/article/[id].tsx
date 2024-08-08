@@ -164,8 +164,8 @@ export default function Home() {
           others untill it has been approved{" "}
         </div>
       )}
-      <h1 className={style.title}>{article.title}</h1>
-      <h2 className={style.credits}>
+      <h1 className="heading-2">{article.title}</h1>
+      <h2 className="body-secondary">
         By: {article.credit} |{" "}
         {" " + new Date(article.createdAt).toLocaleString()}
       </h2>

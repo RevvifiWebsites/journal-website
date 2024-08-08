@@ -1,185 +1,162 @@
 .publishedpopup {
-    padding: 10px;
-    color: red;
-    border: 1px solid red;
-    border-radius: 40px;
-
+  padding: 10px;
+  color: red;
+  border: 1px solid red;
+  border-radius: 40px;
 }
-.title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
 
-}
-.credits {
-    font-size: 0.9rem;
-    font-weight: normal;
-
-}
-.pdfviewer {
-
-}
-.commentswrapper {
-
-}
-.commentauth{
-
-} 
-.commenttext
-{
-
-}
-.page  hr{
-    margin-top: 1%;
-    margin-bottom: 1%;
-    border: 0;
-    border-top: 1px solid #eee;
+.page hr {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border: 0;
+  border-top: 1px solid #eee;
 }
 .page {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow-y: visible;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow-y: visible;
 }
 
 .commentcontainer {
-    position: sticky;
-    top:50px    ;
-    align-self: flex-start;
-    width: 30vw;
-    display: flex;
-    flex-direction: column;
-    padding-left: 3%;
-    box-shadow: 0 4px 8px 0 #FD7E14;
-    border-radius: 10px;
-    background: #1B181B;
-    padding-top: 2%;
+  position: sticky;
+  top: 50px;
+  align-self: flex-start;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  padding-left: 3%;
+  box-shadow: 0 4px 8px 0 #fd7e14;
+  border-radius: 10px;
+  background: #1b181b;
+  padding-top: 2%;
 }
 .comment {
-    filter: none;
+  filter: none;
 }
-.readercont{
-    display: flex;
-    flex-direction: row;
-    align-items: top;
-    justify-content: space-between;
-    overflow: visible;
+.readercont {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: space-between;
+  overflow: visible;
 }
 .commentlist {
-    max-height: 80vh;
-    overflow-y: scroll;
-    text-wrap: normal;
-    overflow-x: hidden;
+  max-height: 80vh;
+  overflow-y: scroll;
+  text-wrap: normal;
+  overflow-x: hidden;
 }
 .commentauth {
-    color: #BBBBBB;
+  color: #bbbbbb;
 }
 .commenttext {
-    color: #FFFFFF;
-    padding-top: 1%;
-    white-space: initial;
+  color: #ffffff;
+  padding-top: 1%;
+  white-space: initial;
 }
 
 .votebutton {
-    background-color: transparent;
-    color: #fff;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap:30%;
+  background-color: transparent;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 30%;
 }
 
-.votesection{
-    display: flex;
-    flex-direction: row;
-    gap: 5%;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    width: 30%;
+.votesection {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  width: 30%;
 }
-.clickedbutton{
-    background-color: #FFF;
+.clickedbutton {
+  background-color: #fff;
 }
 .commenthr {
-    border: 0;
-    border-top: 1px solid #FFFFF0;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    transform: translateX(-5%);
+  border: 0;
+  border-top: 1px solid #fffff0;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  transform: translateX(-5%);
 }
 .commentcontainer textarea {
-    background: #1B181B;
-    color: #FFFFFF;
-    border: 1px solid #FD7E14;
-    border-radius: 10px;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 90%;
-    font-size: 1rem;
-    padding-left: 5px;
-    height: 5vh;
-    padding-right: 10%;
-    resize: none;
+  background: #1b181b;
+  color: #ffffff;
+  border: 1px solid #fd7e14;
+  border-radius: 10px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 90%;
+  font-size: 1rem;
+  padding-left: 5px;
+  height: 5vh;
+  padding-right: 10%;
+  resize: none;
 }
 .addcomment {
-    position: absolute;
-    bottom: 0.8%;
-    right: 15%;
-    width: 10%;
-    height: 5vh;
-    background: transparent;
+  position: absolute;
+  bottom: 0.8%;
+  right: 15%;
+  width: 10%;
+  height: 5vh;
+  background: transparent;
 }
 .commentviewbutton {
-    display: none;
+  display: none;
 }
 .commentopenbutton {
-    display: none;
+  display: none;
 }
 @media screen and (max-width: 768px) {
-    .commentviewbutton {
-        display: block;
-        position: absolute;
-        right: 5px;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 2rem;
-    }
-    .commentcontainer {
-        width: 90vw;
-        position: fixed;
-        top: 10%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .hiddencomment {
-        display: none!important;
-    }
-    .commentopenbutton {
-        display: block;
-        position: fixed;
-        right: 5px;
-        background: #FD7E14;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        bottom: 5%;
-    }
-    .commentlist {
-        padding-left: 5%;
-    }
-    .commentcontainer hr {
-        display: none;
-
-    }
-    .page {
-        position: absolute;
-        left: 0;
-    }
-    .page h1, .page p, .page h2{
-        padding-left: 5%;
-        padding-right: 5%;
-    }
+  .commentviewbutton {
+    display: block;
+    position: absolute;
+    right: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 2rem;
+  }
+  .commentcontainer {
+    width: 90vw;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .hiddencomment {
+    display: none !important;
+  }
+  .commentopenbutton {
+    display: block;
+    position: fixed;
+    right: 5px;
+    background: #fd7e14;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    bottom: 5%;
+  }
+  .commentlist {
+    padding-left: 5%;
+  }
+  .commentcontainer hr {
+    display: none;
+  }
+  .page {
+    position: absolute;
+    left: 0;
+  }
+  .page h1,
+  .page p,
+  .page h2 {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
 }
