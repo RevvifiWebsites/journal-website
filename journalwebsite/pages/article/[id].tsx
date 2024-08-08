@@ -275,16 +275,22 @@ export default function Home() {
             opencomment ? style.opencomment : style.hiddencomment
           }`}
         >
-          <h3 className="heading-3">Comments</h3>
+          {/* <h3 className="heading-3">Comments</h3> */}
           <div
             className={style.commentviewbutton}
             onClick={() => {
               setOpenComment(!opencomment);
             }}
           >
-            x
+            <Image
+              src="/icons/close.svg"
+              width="24"
+              height="24"
+              alt="close"
+            ></Image>
           </div>
           <div className={style.commentlist}>
+            <h3 className="heading-3">Comments</h3>
             {comments.map((comment) => {
               return (
                 <div className={style.comment}>

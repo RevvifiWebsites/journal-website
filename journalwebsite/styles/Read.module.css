@@ -21,6 +21,7 @@
   position: sticky;
   top: 30px;
   align-self: flex-start;
+  justify-content: space-between;
   width: 30vw;
   display: flex;
   flex-direction: column;
@@ -79,13 +80,7 @@
 .clickedbutton {
   background-color: #fff;
 }
-/* .commenthr {
-  border: 0;
-  border-top: 1px solid #fffff0;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  transform: translateX(-50%);
-} */
+
 .commentcontainer textarea {
   background: #1b181b;
   color: #ffffff;
@@ -117,19 +112,18 @@
   .commentviewbutton {
     display: block;
     position: absolute;
-    right: 5px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 2rem;
+    right: 25px;
+    top: 25px;
+    cursor: pointer;
   }
   .commentcontainer {
-    width: 90vw;
+    width: 95vw;
     height: 90vh;
     position: fixed;
-    top: 60px;
+    top: 65px;
     left: 50%;
     transform: translateX(-50%);
+    background-color: #1b181b;
   }
   .hiddencomment {
     display: none !important;
@@ -137,27 +131,17 @@
   .commentopenbutton {
     display: block;
     position: fixed;
-    right: 5px;
+    right: 15px;
     background: #fd7e14;
     color: white;
     border: none;
     border-radius: 5px;
-    bottom: 5%;
+    bottom: 30px;
+    padding: 10px 10px 5px 10px;
   }
-  .commentlist {
-    padding-left: 5%;
-  }
-  .commentcontainer hr {
-    display: none;
-  }
+
   .page {
     position: absolute;
     left: 0;
-  }
-  .page h1,
-  .page p,
-  .page h2 {
-    padding-left: 5%;
-    padding-right: 5%;
   }
 }
