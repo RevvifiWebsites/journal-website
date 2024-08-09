@@ -33,6 +33,10 @@ const Sidebar = () => {
           <Image src="/images/plus.svg" alt="add article image" width={0} height={0} className={styles.navimage}></Image>
           <p className="body-bold">Add Research</p>
         </a>
+        <a href = "/logged/submitfunfact" className={styles.navLink}>
+          <Image src="/images/Lightbulb.svg" alt="add article image" width={0} height={0} className={styles.navimage}></Image>
+          <p className="body-bold">Add Fun Facts</p>
+        </a>
       </div>
       {/* Bottom Nav */}
       <div className={styles.navcontainers}>
@@ -77,6 +81,10 @@ const Topbar = () => {
         <a href = "/logged/account" className={styles.navLink}>
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/account.svg"></Image>
           <p className="body-bold">Account</p>
+        </a>
+        <a href = "/logged/submitfunfact" className={styles.navLink}>
+          <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/Lightbulb.svg"></Image>
+          <p className="body-bold">Add Fun Facts</p>
         </a>
         <a href={isclient && document.cookie.indexOf("username") == -1 ?  "/login" : "/logout"} className={styles.navLink}>
               <Image width={0} height={0} className = {styles.navimage} alt = "logout" src = "/images/logout.svg"></Image>

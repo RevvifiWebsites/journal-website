@@ -48,6 +48,7 @@ model User {
   admin        Boolean    @default(false)
   comments     Comment[]
   funfacts     FunFact[]
+  country      String?
   @@map(name: "users")
   @@unique([id, name])
 }
@@ -58,6 +59,7 @@ model FunFact {
   author   User?   @relation(fields: [authorId], references: [id])
   authorId String?
   createdAt DateTime @default(now()) @map(name: "created_at")
-  Article   Article? @relation(fields: [articleId], references: [id])
+  Article   Article? @relation(fields: [articleId], references: [id]) 
   articleId String?
+  published Boolean @default(false)
 }
