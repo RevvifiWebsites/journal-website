@@ -69,8 +69,8 @@ export default  function Articlebox(Article: {
       }}
     >
       <canvas  width = {1000} height = {800} className={styles.image} id={"canvasdis" + Article.id}></canvas>
-      <h1>{Article.title}</h1>
-      <h2>By: {Article.credit}</h2>
+      <h1 className="body-bold">{Article.title}</h1>
+      <h2 className="body-secondary">By: {Article.credit}</h2>
     </li>
   );
 }

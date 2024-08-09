@@ -161,11 +161,11 @@ export default function Home() {
       {!article.published && (
         <div className={style.publishedpopup}>
           This article is not yet published. It will not be discoverable to
-          others untill it has been approved{" "}
+          others until it has been approved{" "}
         </div>
       )}
-      <h1 className={style.title}>{article.title}</h1>
-      <h2 className={style.credits}>
+      <h1 className="heading-2">{article.title}</h1>
+      <h2 className="body-secondary">
         By: {article.credit} |{" "}
         {" " + new Date(article.createdAt).toLocaleString()}
       </h2>
@@ -265,8 +265,8 @@ export default function Home() {
         >
           <Image
             src="/icons/comment.svg"
-            width="25"
-            height="25"
+            width="20"
+            height="20"
             alt="comment"
           ></Image>
         </button>
@@ -275,15 +275,22 @@ export default function Home() {
             opencomment ? style.opencomment : style.hiddencomment
           }`}
         >
+          {/* <h3 className="heading-3">Comments</h3> */}
           <div
             className={style.commentviewbutton}
             onClick={() => {
               setOpenComment(!opencomment);
             }}
           >
-            X
+            <Image
+              src="/icons/close.svg"
+              width="24"
+              height="24"
+              alt="close"
+            ></Image>
           </div>
           <div className={style.commentlist}>
+            <h3 className="heading-3">Comments</h3>
             {comments.map((comment) => {
               return (
                 <div className={style.comment}>
@@ -344,10 +351,10 @@ export default function Home() {
               );
             })}
           </div>
-          <hr className={style.commenthr}></hr>
+          {/* <hr className={style.commenthr}></hr> */}
           <textarea
             id="commentbox"
-            placeholder="add comment"
+            placeholder="Add Comment"
             onChange={(e) => {
               setComment(e.target.value);
             }}
@@ -397,8 +404,8 @@ export default function Home() {
           >
             <Image
               src="/icons/send.svg"
-              width="35"
-              height="35"
+              width="24"
+              height="24"
               alt="send"
             ></Image>
           </button>

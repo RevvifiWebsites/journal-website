@@ -1,48 +1,46 @@
-
 .canvaspdf {
-    width: 50%;
-    aspect-ratio: 210/297;
-    box-sizing: border-box;
-    border: 1px solid black ;
-    border-radius: 20px;
+  width: 50%;
+  aspect-ratio: 210/297;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 20px;
 }
-@media screen and (max-width: 768px) {
-    .canvaspdf {
-        width: 90vw;
-        aspect-ratio: 210/297;
-    }
-    .flexcontainer {
-        width: 100vw;
-    }
 
-}
 .flexcontainer {
-    width: 80vw;
-    overflow-y: scroll;
-    max-height: 100vh;
+  width: 80vw;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
-.unstackedflex{
-    width: 80vw;
-    overflow-y: scroll;
-    flex-wrap: nowrap;
+
+.unstackedflex {
+  width: 80vw;
+  overflow-y: scroll;
+  flex-wrap: nowrap;
 }
+
 .nostackedcanvas {
-    width: 100%;
-    aspect-ratio: 210/297;
-    box-sizing: border-box;
-    border: 1px solid black ;
+  width: 100%;
+  aspect-ratio: 210/297;
+  box-sizing: border-box;
+  border: 1px solid black;
 }
+
 @media screen and (max-width: 768px) {
-    .nostackedcanvas {
-        width: 100vw;
-        height: 30vh;
-        aspect-ratio: 210/297;
-    }
-    .flexcontainer {
-        
-        width: 100vw;
-        position: absolute;
-        left: 0;
-        height: 30vh;
-    }
+  .canvaspdf {
+    width: 90vw;
+    aspect-ratio: 210/297;
+  }
+  .flexcontainer {
+    width: 100vw;
+  }
+  .nostackedcanvas {
+    width: 100vw;
+    aspect-ratio: 210/297;
+  }
+  .flexcontainer {
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    height: 30vh;
+  }
 }

@@ -1,25 +1,35 @@
-.container {
-    cursor: pointer!important;
-    width: 70vw;
-    margin-bottom: 5vh;
+/* .container {
+  cursor: pointer !important;
+  width: 70vw;
+  margin-bottom: 40px;
 }
 @media screen and (max-width: 768px) {
-    .container {
-        width: 90vw;
-    }
-}
+  .container {
+    width: 90vw;
+  }
+} */
+
 .image {
-    width: 100%;
-    height: 30vh;
-    border-radius: 10px;
+  width: 100%;
+  object-fit: cover;
+  height: 300px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
 }
+
 .container h1 {
-    font-size: 1.7rem;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+  cursor: pointer;
+}
+
+/* .container h1 {
+  font-size: 1.7rem;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 .container h2 {
-    font-size: 1rem;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-}
+  font-size: 1rem;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+} */
