@@ -76,6 +76,9 @@ export default function SubmitFunFact() {
                 },
                 body: JSON.stringify({facts: factvalue}),
                 }).then((res) => {
+                    if(res.ok){
+                        window.location.href = "/logged/account";
+                    }
                 })
           }}>Submit Fun Facts</button>
         </div>
