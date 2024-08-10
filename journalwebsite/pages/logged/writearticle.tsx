@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import Navigation from "../sidebar";
 import PDFViewer from "../pdfviewer";
-
+import PopUp from "../popup";
 export default function Write() {
-  //TODO maybe save this to local storage so that it isn't lost? maybe allow draft saving?
   const [article, setArticle] = useState({
     title: "Enter Title",
     authors: "",
@@ -14,7 +13,7 @@ export default function Write() {
   const [loading, setLoading] = useState(false);
   const [numfacts, setNumFacts] = useState(1);
   const [file, setFile] = useState(null as File | null);
-
+  const [popup, setPopup] = useState(null as string | null);
   return (
     <div className={styles.page}>
       <Navigation />
@@ -23,7 +22,9 @@ export default function Write() {
         className="background-image"
         draggable="false"
       />
+      <PopUp popup = {popup} setPopup = {setPopup}>
 
+      </PopUp>
       <div className={styles.pageContent}>
         <h1 className="heading-2">Submit Your Research Here</h1>
         {/* Research Title Input */}
@@ -194,10 +195,20 @@ export default function Write() {
           className={styles.submitbutton}
           onClick={async (e) => {
             //todo popups for errors
-            if(loading){
+            if(document.cookie.indexOf("username") == -1){
+              setPopup("Please log in to submit an article");
               return;
             }
-            if (article.title == "Enter Title" || !file) {
+            if(loading){
+              setPopup("Please wait for the file to finish uploading");
+              return;
+            }
+            if (article.title == "Enter Title" ) {
+              setPopup("Please enter a title");
+              return;
+            }
+            if (!file) {
+              setPopup("Please upload a file");
               return;
             }
             let base64file = null;

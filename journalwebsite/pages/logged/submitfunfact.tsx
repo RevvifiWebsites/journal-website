@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SideBar from "../sidebar";
 import styles from "@/styles/Write.module.css";
+import Popup from "../popup";
 
 export default function SubmitFunFact() {
 
@@ -17,8 +18,10 @@ export default function SubmitFunFact() {
       }
     }
   }, [numfacts])
+  const [popup, setPopup] = useState(null as string | null);
     return (<>
     <SideBar/>
+    <Popup popup = {popup} setPopup = {setPopup}/>
     <div className = {styles.page}>
         <div className = {styles.pageContent}>
             <h2>Submit Fun Facts</h2>
@@ -68,6 +71,10 @@ export default function SubmitFunFact() {
             let facts = Array.from(document.getElementById("submmitedfacts")?.children as HTMLCollectionOf<HTMLElement>);
             let  factvalue = facts.map((fact) => (fact.children[0] as HTMLInputElement).value);
             factvalue = factvalue.filter((fact) => fact != "");
+            if(factvalue.length == 0){
+              setPopup("Please enter at least one fun fact");
+              return;
+            }
             console.log(factvalue);
             fetch("/api/submitfunfact", {
                 method: "POST",
