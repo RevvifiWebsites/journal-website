@@ -25,7 +25,8 @@ export  default async function handler(
         });
             let blob = await  put(`articles/${article.id}`, req.body.file, {
                 access: 'public',
-                contentType: "application/pdf"
+                contentType: "application/pdf",
+                cacheControlMaxAge: 60 * 60 * 24 * 365,
               });
               if(req.body.funfacts){
                 console.log(req.body.funfacts);

@@ -5,15 +5,16 @@ import Markdown from "react-markdown";
 import Navigation from "../sidebar";
 import PDFViewer from "../pdfviewer";
 
-export default function Home() {
+export default function Write() {
   //TODO maybe save this to local storage so that it isn't lost? maybe allow draft saving?
   const [article, setArticle] = useState({
     title: "Enter Title",
     authors: "",
   });
-
+  const [loading, setLoading] = useState(false);
   const [numfacts, setNumFacts] = useState(1);
   const [file, setFile] = useState(null as File | null);
+
   return (
     <div className={styles.page}>
       <Navigation />
@@ -96,7 +97,7 @@ export default function Home() {
           {/* Selection for File or Text */}
           <div className={styles.rightcontents}></div>
           <label htmlFor="file" className={styles.fileinputcont}>
-            {!file && (
+            {(!file && !loading) && (
               <Image
                 src="/fileplus.svg"
                 width={0}
@@ -108,8 +109,10 @@ export default function Home() {
             <div className={styles.filelabel}>
               {file
                 ? file.name
-                : "Drag and drop a file here or click the button below"}
+                : loading ? <>Uploading file</> : "Drag and drop a file here or click the button below. (PDF, DOC, DOCX)"}
             </div>
+            <br />
+            {loading && <div className={styles.loadingbar}></div>}
             <input
               type="file"
               id="file"
@@ -141,6 +144,7 @@ export default function Home() {
                         reader.readAsDataURL(e.target.files[0]);
                       }
                     });
+                    setLoading(true);
                     const res = await fetch("/api/convertdoc", {
                       headers: {
                         "Content-Type": "application/json",
@@ -150,10 +154,11 @@ export default function Home() {
                         file: base64file,
                       }),
                     }).then((res) => res.text());
+                    setLoading(false);
                     setFile(
                       new File(
                         [Buffer.from(res, "base64")],
-                        e.target.files[0].name + ".pdf",
+                        e.target.files[0].name.split(".")[0] + ".pdf",
                         {
                           type: "application/pdf",
                         }
@@ -166,7 +171,7 @@ export default function Home() {
               }}
               accept=".pdf, .doc, .docx"
             />
-            {file ? (
+            {(file  ) ? (
               <button
                 className={styles.filebutton}
                 onClick={(e) => {
@@ -175,17 +180,23 @@ export default function Home() {
               >
                 Clear File
               </button>
-            ) : (
+            ) : !loading && (
               <div className={styles.filebutton}>Select File</div>
             )}
           </label>
         </div>
 
         <h1 className={styles.leftinputtitle}>Preview</h1>
-        {file && <PDFViewer file={file} style={{}}></PDFViewer>}
+        {file && <div className = {
+          styles.pdfviewercontainer
+        }><PDFViewer file={file} style={{}}  contstile = {styles.pdfviewer} ></PDFViewer></div>}
         <button
           className={styles.submitbutton}
           onClick={async (e) => {
+            //todo popups for errors
+            if(loading){
+              return;
+            }
             if (article.title == "Enter Title" || !file) {
               return;
             }
