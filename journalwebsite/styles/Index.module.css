@@ -114,24 +114,6 @@
   position: relative;
 }
 
-.uniList::before,
-.uniList::after {
-  content: "";
-  position: absolute;
-  width: 10%;
-  height: 100%;
-}
-
-.uniList::before {
-  left: 0px;
-  background: linear-gradient(-90deg, rgba(27, 24, 27, 0%) 0%, #1b181b 100%);
-}
-
-.uniList::after {
-  background: linear-gradient(-90deg, rgba(27, 24, 27, 0%) 0%, #1b181b 100%);
-  right: 0;
-}
-
 /* *** Featured Work *** */
 .featuredWorkContainer {
   /* display: flex;
