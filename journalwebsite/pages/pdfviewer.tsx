@@ -46,6 +46,7 @@ export default function PDFViewer(props: {
         console.log("here");
         let filedata = (file).split(",") as any;
         filedata = filedata[filedata.length - 1];
+        console.log(filedata);
         let doc = await pdf.getDocument({
           data: atob(filedata),
         });

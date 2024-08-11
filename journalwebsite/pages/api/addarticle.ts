@@ -26,18 +26,19 @@ export  default async function handler(
             let blob = await  put(`articles/${article.id}`, req.body.file, {
                 access: 'public',
                 contentType: "application/pdf",
-                cacheControlMaxAge: 60 * 60 * 24 * 365,
+                cacheControlMaxAge: Infinity,
               });
               if(req.body.funfacts){
                 console.log(req.body.funfacts);
                 for(let fact of req.body.funfacts){
+                    if(fact.length > 0){
                     await Prisma.funFact.create({
                         data: {
                             articleId: article.id,
                             authorId: user.id,
                             content: fact,
                         }
-                    });
+                    });}
                 }
               }
         res.status(200).json({ message: "Article created",  id:  article.id });

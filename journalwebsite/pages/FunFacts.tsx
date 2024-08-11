@@ -1,8 +1,14 @@
 import { useState, useEffect, ReactElement } from 'react';
 import styles from "../styles/FunFacts.module.css";
 import data from "../data.json";
-
-export default function FunFacts() {
+interface FunFactsProp {
+  published?: boolean;
+  take?: number;
+  random?: boolean;
+  admin?: boolean;
+  width?: string;
+}
+export default function FunFacts(props : FunFactsProp) {
   const [funFacts, setFunFacts] = useState([] as {
     id: string;
     content: string;
@@ -25,7 +31,9 @@ export default function FunFacts() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style = {{
+      width: props.width || "100%",
+    }}>
       <h2 className="heading-2">Fun Facts 🤯</h2>
       <ul>
         {funFacts.map((fact) => (

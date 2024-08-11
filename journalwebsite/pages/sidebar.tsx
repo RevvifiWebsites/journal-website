@@ -3,7 +3,7 @@ import styles from "@/styles/Sidebar.module.css";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
-const Sidebar = () => {
+const Sidebar = (props : {admin: boolean}) => {
   const condensedLogo = <p className={styles.logoText}><span className="accent-color">y</span>m</p>
   const expandedLogo = <p className={styles.logoText}><span className="accent-color">young</span>minds.</p>
 
@@ -39,7 +39,12 @@ const Sidebar = () => {
         </a>
       </div>
       {/* Bottom Nav */}
+
       <div className={styles.navcontainers}>
+      {props.admin && <a href = "/logged/admin" className={styles.navLink}>
+          <Image width={0} height={0} className = {styles.navimage} alt = "admin" src = "/images/admin.svg"></Image>
+          <p className="body-bold">Admin Dashboard</p>
+        </a>}
         <a href = "/logged/account" className={styles.navLink}>
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/account.svg"></Image>
           <p className="body-bold">Account</p>
@@ -53,7 +58,7 @@ const Sidebar = () => {
   )
 }
 
-const Topbar = () => {
+const Topbar = (props : {admin : boolean}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleNav = () => {
     setIsExpanded(!isExpanded);
@@ -82,6 +87,10 @@ const Topbar = () => {
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/account.svg"></Image>
           <p className="body-bold">Account</p>
         </a>
+        {props.admin && <a href = "/logged/admin" className={styles.navLink}>
+          <Image width={0} height={0} className = {styles.navimage} alt = "admin" src = "/images/admin.svg"></Image>
+          <p className="body-bold">Admin Dashboard</p>
+        </a>}
         <a href = "/logged/submitfunfact" className={styles.navLink}>
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/Lightbulb.svg"></Image>
           <p className="body-bold">Add Fun Facts</p>
@@ -97,8 +106,22 @@ const Topbar = () => {
 
 const Navigation = () => {
   const [isMobile, setIsMobile] = useState(false);
-
+  const [admin , setAdmin] = useState(false);
   useEffect(() => {
+    fetch("/api/getuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((data) => {
+        setAdmin(data.admin);
+      });
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768); // Adjust this breakpoint as needed
     };
@@ -111,7 +134,7 @@ const Navigation = () => {
 
   return (
     <>
-      {isMobile ? <Topbar /> : <Sidebar />}
+      {isMobile ? <Topbar admin = {admin} /> : <Sidebar admin = {admin} />}
     </>
   );
 };
