@@ -141,7 +141,7 @@ export default function Home() {
         <img className={styles.footerCurve} src="/images/footerCurve.png" />
         <div className={styles.footerContent}>
           <h2 className="heading-2">Today could be the best day of your (research) life</h2>
-          <button className="button-primary"><a href="/login">Sign Up</a></button>
+          <a href="/login"> <button className="button-primary">Sign Up</button></a>
         </div>
         <div className={styles.footerBottom}>
           <p className="body-secondary">Copyright © 2024 YoundMinds, All Rights Reserved</p>
