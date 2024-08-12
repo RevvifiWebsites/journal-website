@@ -11,6 +11,13 @@ export  default async function handler(
     let article = await Prisma.article.findUnique({
         where: {
             id: id,
+        },
+        include: {
+            author: {
+                select: {
+                    id: true,
+                }
+            },
         }
     });
     if(article){

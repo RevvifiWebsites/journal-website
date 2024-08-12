@@ -16,7 +16,12 @@
   margin-bottom: 20px;
   overflow-y: visible;
 }
-
+.author {
+  cursor: pointer;
+}
+.author:hover {
+  text-decoration: underline;
+}
 .commentcontainer {
   position: sticky;
   top: 30px;

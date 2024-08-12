@@ -81,6 +81,7 @@ export default function Home() {
     } | null,
     published: true,
     createdAt: "Loading...",
+    author: null as any
   });
   const router = useRouter();
   const [comments, setComments] = useState([
@@ -166,7 +167,11 @@ export default function Home() {
       )}
       <h1 className="heading-2">{article.title}</h1>
       <h2 className="body-secondary">
-        By: {article.credit} |{" "}
+        By: <span className = {style.author} onClick = {
+          () => {
+            window.location.href = `/user/${article.author.id}`
+          }
+        } >{article.credit}</span> |{" "}
         {" " + new Date(article.createdAt).toLocaleString()}
       </h2>
 
@@ -231,7 +236,7 @@ export default function Home() {
               if (
                 window.confirm("Are you sure you want to delete this article?")
               ) {
-                fetch(`/api/featurearticle`, {
+                fetch(`/api/deletearticle`, {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",

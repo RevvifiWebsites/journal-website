@@ -1,0 +1,56 @@
+.page {
+    width: 100vw;
+    text-align: left;
+  }
+  
+  .statchips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 10px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+  }
+  
+  .statchip {
+    background-color: #252225;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 25px;
+  }
+  
+  .statimage {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .textchip {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .textchip p {
+    color: #bbbbbb;
+  }
+  @media (max-width: 768px) {
+    .page {
+      position: absolute;
+      left: 5vw;
+      width: 90vw;
+    }
+    .statchip {
+      padding: 10px;
+      width: 40vw;
+      align-items: center;
+    }
+    .textchip p {
+      font-size: 0.8rem;
+    }
+    .statimage {
+      width: 35px;
+      aspect-ratio: 1;
+    }
+  }
