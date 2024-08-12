@@ -16,14 +16,14 @@ export default function FunFacts(props : FunFactsProp) {
     articleId : string;
   }[]);
   useEffect(() => {
-    fetch("/api/getfunfacts", {
+    fetch(props.published ? "/api/getunpublishedfacts" :"/api/getfunfacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        take: 10,
-        random: true,
+        take: props.take || 10,
+        random: props.random || true,
       }),
     }).then((res) => res.json()).then((data) => {
       setFunFacts(data);

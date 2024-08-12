@@ -148,7 +148,7 @@ export default function Admin() {
       </div>
       </div>
       <div className = {styles.factslist}>
-        <FunFacts admin  width = "50vw"/>
+        <FunFacts admin published  width = "50vw"/>
       </div>
 
       </div>
