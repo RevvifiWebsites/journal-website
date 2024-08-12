@@ -19,7 +19,6 @@ export  default async function handler(
                 mode: 'expanded',
             });
             let file = blobs.blobs[0];
-            console.log(file);
             if(file){
             res.status(200).json({...file });
             }

@@ -204,7 +204,7 @@ export default function Admin() {
           {/* Fun Facts */}
           <div className={styles.factslist}>
             {/* <FunFacts admin published width="50vw" /> */}
-            <FunFacts admin />
+            <FunFacts admin width = '50vw' take = {20}  />
           </div>
         </div>
       </div>

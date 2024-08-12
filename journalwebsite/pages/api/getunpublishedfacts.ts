@@ -10,7 +10,8 @@ export default async function handler(
         res.status(401).json({message: "Unauthorized"});
         return;
     }
-  let start = req.query.start as string | undefined;
+  let start = req.body.start as string | undefined;
+  console.log(start);
   let facts = await Prisma.funFact.findMany({
     where: {
         OR: [
@@ -24,8 +25,22 @@ export default async function handler(
             }
         ]
     },
+    include: {
+      Article: {
+        select: {
+          id: true,
+          title: true,
+          published: true,
+        },
+      },
+      author: {
+        select: {
+          name: true,
+        },
+      },
+      },
     skip: start ? parseInt(start) : 0,
-    take: 10,
+    take: req.body.take ? parseInt(req.body.take as string) : 10,
   });
   if (facts) {
     res.status(200).json(facts);
