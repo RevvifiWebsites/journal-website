@@ -78,7 +78,7 @@ export default function Admin() {
       })
       .then(async (data) => {
         for (let i = 0; i < data.length; i++) {
-          // data[i].file =await (await fetch((await ((await fetch(`/api/getpdf?id=${data[i].id}`)).json())).url)).text();
+           data[i].file =await (await fetch((await ((await fetch(`/api/getpdf?id=${data[i].id}`)).json())).url)).text();
         }
         setArticles(data);
       });
