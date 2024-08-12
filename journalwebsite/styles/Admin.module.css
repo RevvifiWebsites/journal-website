@@ -1,95 +1,103 @@
-.title{
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
 .page {
-    width: 100vw;
-    text-align: left;
+  width: 100vw;
+  text-align: left;
 }
+
 .statchips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 10px;
-    margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 10px;
+  margin-top: 25px;
+  margin-bottom: 50px;
 }
+
 .statchip {
-    background-color: #252225;
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
+  background-color: #252225;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 25px;
 }
+
 .statimage {
-    width: 80px;
-    height: 80px;
-    margin-right: 1rem;
-    margin-left: 1rem;
+  width: 40px;
+  height: 40px;
 }
+
 .textchip {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .textchip p {
-    color: #BBBBBB;
+  color: #bbbbbb;
 }
 @media (max-width: 768px) {
-    .page{
-        position: absolute;
-        left: 5vw;
-        width: 90vw;
-    }
-    .statchip {
-        padding: 10px;
-        width: 40vw;
-        align-items: center;
-    }
-    .textchip p {
-        font-size: 0.8rem;
-    }
-    .statimage{
-        width: 8vw;
-        height: 8vw;
-    }
+  .page {
+    position: absolute;
+    left: 5vw;
+    width: 90vw;
+  }
+  .statchip {
+    padding: 10px;
+    width: 40vw;
+    align-items: center;
+  }
+  .textchip p {
+    font-size: 0.8rem;
+  }
+  .statimage {
+    width: 35px;
+    aspect-ratio: 1;
+  }
 }
 .article {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1rem;
-    width: 50vw;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  width: 50vw;
 }
 .pdf {
-    max-height: 15vh!important;
-    width: 15vw!important;
+  max-height: 15vh !important;
+  width: 15vw !important;
 }
 .canvaspdf {
-    width: 15vw!important;
-    max-height: 15vh!important;
+  width: 15vw !important;
+  max-height: 15vh !important;
 }
 .articleinfo {
-    display: flex;
-    flex-direction: column;
-    margin-left: 1rem;
-    max-width: 65%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  max-width: 65ch;
 }
+
 .loadmore {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    background-color: #FD7E14;
-    color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  background-color: #fd7e14;
+  color: white;
+  transition: all 0.2s ease;
 }
+
+.loadmore:hover {
+  background-color: white;
+  color: #fd7e14;
+}
+
 .articles {
-    max-width: 50vw;
+  margin-top: 35px;
+  /* max-width: 50vw; */
 }
-.factslist {
-    padding-left: 1rem;
-}
-.maincontent{
-    display: flex;
-    flex-direction: row;
-    
+
+.maincontent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 75px;
 }

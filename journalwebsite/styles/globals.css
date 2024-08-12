@@ -37,6 +37,8 @@
 
 .heading-2 {
   font-size: var(--fs-h2);
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 
 .heading-3 {
@@ -132,9 +134,11 @@ button {
   border: none;
   font-size: var(--fs-body-regular);
   font-weight: 550;
+  color: white;
   padding: 8px 30px;
   border-radius: var(--border-radius);
   cursor: pointer !important;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .button-primary,
@@ -169,7 +173,7 @@ footer {
 @media (max-width: 768px) {
   html,
   body {
-    padding: 40px 15px 20px 50px;
+    padding: 40px 15px 20px 15px;
   }
 }
 

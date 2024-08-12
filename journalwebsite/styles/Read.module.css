@@ -113,6 +113,29 @@
   display: none;
 }
 
+.publishButton,
+.deleteButton,
+.featureButton {
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-color: #313131;
+  padding: 10px 15px 10px 40px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.publishButton {
+  background-image: url("/icons/tick.svg");
+}
+
+.deleteButton {
+  background-image: url("/icons/cross.svg");
+}
+
+.featureButton {
+  background-image: url("/icons/featured.svg");
+}
+
 @media screen and (max-width: 768px) {
   .commentviewbutton {
     display: block;

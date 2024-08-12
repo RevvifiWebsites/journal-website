@@ -169,82 +169,107 @@ export default function Home() {
         By: {article.credit} |{" "}
         {" " + new Date(article.createdAt).toLocaleString()}
       </h2>
-      {admin && (
-        <><button
-          className={style.featurebutton}
-          onClick={() => {
-            fetch(`/api/featurearticle`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id: id,
-              }),
-            });
-          }}
-        >
-          Feature
-        </button>
 
-      <button
-        className={style.featurebutton}
-        onClick={async () => {
-          if (window.confirm("Are you sure you want to delete this article?")) {
-            fetch(`/api/featurearticle`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id: id,
-              }),
-            });
-          }
-        }}
-      >
-        Delete
-      </button> 
-      {!article.published && <button
-        className={style.featurebutton}
-        onClick={async () => {
-          if (window.confirm("Are you sure you want to publish this article?")) {
-            fetch(`/api/publisharticle`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id: id,
-              }),
-            });
-          }
-        }}
-      >
-        Publish
-      </button>}
-      {article.published && <button
-        className={style.featurebutton}
-        onClick={async () => {
-          if (window.confirm("Are you sure you want to unpublish this article?")) {
-            fetch(`/api/publisharticle`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                id: id,
-                unpublish: true,
-              }),
-            });
-          }
-        }}
-      >
-        Unpublish
-      </button>}
-      </>
+      {/* Buttons for Admins Only */}
+      {admin && (
+        <div>
+          {/* Publish Button */}
+          {!article.published && (
+            <button
+              className={style.publishButton}
+              onClick={async () => {
+                if (
+                  window.confirm(
+                    "Are you sure you want to publish this article?"
+                  )
+                ) {
+                  fetch(`/api/publisharticle`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      id: id,
+                    }),
+                  });
+                }
+              }}
+            >
+              Approve
+            </button>
+          )}
+
+          {/* Unpublish Button */}
+          {article.published && (
+            <button
+              className={style.deleteButton}
+              onClick={async () => {
+                if (
+                  window.confirm(
+                    "Are you sure you want to unpublish this article?"
+                  )
+                ) {
+                  fetch(`/api/publisharticle`, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      id: id,
+                      unpublish: true,
+                    }),
+                  });
+                }
+              }}
+            >
+              Unpublish
+            </button>
+          )}
+
+          {/* Delete Button */}
+          <button
+            className={style.deleteButton}
+            onClick={async () => {
+              if (
+                window.confirm("Are you sure you want to delete this article?")
+              ) {
+                fetch(`/api/featurearticle`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    id: id,
+                  }),
+                });
+              }
+            }}
+          >
+            Disapprove
+          </button>
+
+          {/* Feature Button */}
+          <button
+            className={style.featureButton}
+            onClick={() => {
+              fetch(`/api/featurearticle`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  id: id,
+                }),
+              });
+            }}
+          >
+            Add to Featured Articles
+          </button>
+        </div>
       )}
+
+      {/* White Spacer Line */}
       <hr></hr>
+
+      {/* PDF and Comment Sections */}
       <div className={style.readercont}>
         {
           <PDFViewer
@@ -356,10 +381,10 @@ export default function Home() {
             id="commentbox"
             placeholder="Add Comment"
             onChange={(e) => {
-              setComment(e.target.value);
+              setComment(e.target.value.trim());
             }}
           >
-            {" "}
+            {""}
           </textarea>
           <button
             className={style.addcomment}
