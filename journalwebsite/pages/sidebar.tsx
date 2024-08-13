@@ -45,7 +45,11 @@ const Sidebar = (props : {admin: boolean}) => {
           <Image width={0} height={0} className = {styles.navimage} alt = "admin" src = "/images/admin.svg"></Image>
           <p className="body-bold">Admin Dashboard</p>
         </a>}
-        <a href = "/logged/account" className={styles.navLink}>
+        <a onClick = {() => {
+      if (document.cookie.indexOf("username") == -1)  window.location.href = "/login"
+        window.location.href = `/user/${document.cookie.split(";").filter((e) => {
+          return e.includes("id");
+        })[0].split('=')[1]}`} } className={styles.navLink}>
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/account.svg"></Image>
           <p className="body-bold">Account</p>
         </a>
@@ -83,7 +87,11 @@ const Topbar = (props : {admin : boolean}) => {
           <Image src="/images/plus.svg" alt="add article image" width={0} height={0} className={styles.navimage}></Image>
           <p className="body-bold">Add Research</p>
         </a>
-        <a href = "/logged/account" className={styles.navLink}>
+        <a  onClick = {() => {
+      if (document.cookie.indexOf("username") == -1)  window.location.href = "/login"
+        window.location.href = `/user/${document.cookie.split(";").filter((e) => {
+          return e.includes("id");
+        })[0].split('=')[1]}`} }className={styles.navLink}>
           <Image width={0} height={0} className = {styles.navimage} alt = "account" src = "/images/account.svg"></Image>
           <p className="body-bold">Account</p>
         </a>

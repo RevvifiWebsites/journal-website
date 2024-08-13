@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SideBar from "../sidebar";
 import styles from "../../styles/User.module.css";
 import Image from "next/image";
+import PDFViewer from "../pdfviewer";
 export interface User {
   id: string;
   createdAt: string;
@@ -23,6 +24,7 @@ export interface Post {
   credit: string;
   type: string;
   featured: boolean;
+  file: string;
 }
 export interface Fact {
   id: string;
@@ -39,8 +41,15 @@ export default function User() {
     if (id) {
       fetch(`/api/getuser?id=${id}`)
         .then((res) => res.json())
-        .then((user) => {
-          console.log(user);
+        .then(async (user) => {
+          let promises = [];
+          for(let i = 0; i < user.posts.length; i++) {
+             promises.push((fetch(`/api/getpdf?id=${user.posts[i].id}`)
+              .then((res) => res.json()).then(async (data) => {
+                user.posts[i].file = await (await fetch(data.url)).text();
+              })));
+          }
+          await Promise.all(promises);
           setUser(user);
         });
     }
@@ -94,7 +103,29 @@ export default function User() {
         </div>
       </div>
       <div className={styles.content}>
-        <div className={styles.artcles}></div>
+        <div className={styles.artcles}>
+          {user?.posts?.map((post) => {
+            return (
+              <div key={post.id} className={styles.article} onClick ={ () => {
+                window.location.href = `/article/${post.id}`
+              }}>
+                <div className = {styles.articletext}>
+                <h2>{post.title.substring(0, 200) + (post.title.length > 200 ? "..." : "")}</h2>
+                <p>{post.credit}</p>
+                <p>{new Date(post.createdAt).toLocaleTimeString()}</p>
+                </div>
+                {/* I so painfully regret not putting the code for loading a file in the pdf viewer, but Im too deep in with the shitty code now... */}
+                <PDFViewer
+                      file={post.file}
+                      contstile={styles.pdf}
+                      overflow="hidden"
+                      nostacked
+                      canvasstyle={styles.canvaspdf}
+                      />
+              </div>
+            );
+          })}
+        </div>
         <div className={styles.funfacts}></div>
       </div>
     </div>

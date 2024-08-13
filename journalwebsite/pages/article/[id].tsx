@@ -248,7 +248,7 @@ export default function Home() {
               }
             }}
           >
-            Disapprove
+            Delete
           </button>
 
           {/* Feature Button */}

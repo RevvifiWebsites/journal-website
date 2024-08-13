@@ -54,3 +54,38 @@
       aspect-ratio: 1;
     }
   }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .artcles {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 60vw;
+  }
+  .article {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+  }
+  .pdf {
+    max-height: 15vh !important;
+    width: 15vw !important;
+  }
+  .canvaspdf {
+    width: 15vw !important;
+    max-height: 15vh !important;
+  }
+  .articletext {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .articletext p {
+    color: #bbbbbb;
+  }
+  .articletext{
+    width: 30vw;
+  }
