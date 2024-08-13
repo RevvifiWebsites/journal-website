@@ -15,7 +15,7 @@
 }
 .button {
   width: 100%;
-  background: #fd7e14;
+  background: #115ed4;
   color: white;
   border: none;
   border-radius: 5px;
@@ -24,7 +24,7 @@
 
 .button:hover {
   background-color: #fffff0;
-  color: #fd7e14;
+  color: #115ed4;
 }
 
 @media (max-width: 768px) {

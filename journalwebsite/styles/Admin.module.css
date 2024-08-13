@@ -80,14 +80,14 @@
   display: flex;
   justify-content: center;
   margin-top: 2rem;
-  background-color: #fd7e14;
+  background-color: #115ed4;
   color: white;
   transition: all 0.2s ease;
 }
 
 .loadmore:hover {
   background-color: white;
-  color: #fd7e14;
+  color: #115ed4;
 }
 
 .articles {

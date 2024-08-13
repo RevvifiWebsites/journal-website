@@ -78,7 +78,13 @@ export default function Admin() {
       })
       .then(async (data) => {
         for (let i = 0; i < data.length; i++) {
-           data[i].file =await (await fetch((await ((await fetch(`/api/getpdf?id=${data[i].id}`)).json())).url)).text();
+          data[i].file = await (
+            await fetch(
+              (
+                await (await fetch(`/api/getpdf?id=${data[i].id}`)).json()
+              ).url
+            )
+          ).text();
         }
         setArticles(data);
       });
@@ -90,7 +96,7 @@ export default function Admin() {
         <h1 className="heading-2">Dashboard</h1>
         <p>
           {" "}
-          Welcome <span style={{ color: "#FD7E14" }}>{user.username}</span>,
+          Welcome <span style={{ color: "#115ED4" }}>{user.username}</span>,
           everything looks great!
         </p>
 
@@ -204,7 +210,7 @@ export default function Admin() {
           {/* Fun Facts */}
           <div className={styles.factslist}>
             {/* <FunFacts admin published width="50vw" /> */}
-            <FunFacts admin width = '50vw' take = {20}  />
+            <FunFacts admin width="50vw" take={20} />
           </div>
         </div>
       </div>
