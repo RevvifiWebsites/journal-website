@@ -112,7 +112,7 @@ export default function User() {
                 <div className = {styles.articletext}>
                 <h2>{post.title.substring(0, 200) + (post.title.length > 200 ? "..." : "")}</h2>
                 <p>{post.credit}</p>
-                <p>{new Date(post.createdAt).toLocaleTimeString()}</p>
+                <p>{new Date(post.createdAt).toLocaleDateString()}</p>
                 </div>
                 {/* I so painfully regret not putting the code for loading a file in the pdf viewer, but Im too deep in with the shitty code now... */}
                 <PDFViewer
