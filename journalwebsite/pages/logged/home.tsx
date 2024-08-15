@@ -15,31 +15,15 @@ export default function Home() {
   });
   console.log(user);
   useEffect(() => {
-    if(localStorage.getItem('token')){
-      window.location.href = "/logged/home";
+    if(document.cookie.indexOf("id") == -1){
+      window.location.href = "/login";
     }
-    fetch("/api/getuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        setUser(data);
-      });
+    else {
+      window.location.href = `/user/${document.cookie.split("id=")[1].split(";")[0]}`;
+    }
   }, [])
   return (
     <>
-    <SideBar/>
-    Your logged in!
-    <a href = "/logged/writearticle">write an article</a>
-    <a href = "/browse">browse articles</a>
-    {user.admin && <a href = "/logged/admin">admin panel</a>}
     </>
   );
 }

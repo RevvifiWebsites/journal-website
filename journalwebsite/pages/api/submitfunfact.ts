@@ -17,4 +17,5 @@ export default async function handler(
             authorId: user.id,
         }))
     });
+    res.status(200).json({message: "Success"});
 }

@@ -14,7 +14,7 @@ export default async function handler(
         id: req.query.id as string,
       },
     });
-    console.log(user);
+    console.log(user?.id);
     if (user) {
       let posts = await Prisma.article.findMany({
         where: {

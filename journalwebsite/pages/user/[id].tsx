@@ -4,6 +4,7 @@ import SideBar from "../sidebar";
 import styles from "../../styles/User.module.css";
 import Image from "next/image";
 import PDFViewer from "../pdfviewer";
+import FunFacts from "../FunFacts";
 export interface User {
   id: string;
   createdAt: string;
@@ -50,6 +51,7 @@ export default function User() {
               })));
           }
           await Promise.all(promises);
+          console.log(user);
           setUser(user);
         });
     }
@@ -104,7 +106,7 @@ export default function User() {
       </div>
       <div className={styles.content}>
         <div className={styles.artcles}>
-          {user?.posts?.map((post) => {
+          {user?.posts?.length > 0 ? user?.posts?.map((post) => {
             return (
               <div key={post.id} className={styles.article} onClick ={ () => {
                 window.location.href = `/article/${post.id}`
@@ -124,9 +126,11 @@ export default function User() {
                       />
               </div>
             );
-          })}
+          }) : <h2>No published articles</h2>}
         </div>
-        <div className={styles.funfacts}></div>
+        <div className={styles.funfacts}>
+          <FunFacts facts={user.facts || [] } />
+        </div>
       </div>
     </div>
   );

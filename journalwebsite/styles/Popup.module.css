@@ -22,7 +22,7 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
-    border: #fd7e14 2px solid;
+    border: #115ed4 2px solid;
   }
   .popupcontent p {
     font-size: 1.2rem;
@@ -31,7 +31,7 @@
   }
   .popupbutton {
     padding: 10px 20px;
-    background-color: #fd7e14;
+    background-color: #115ed4;
     color: white;
     border-radius: 5px;
     font-size: 1rem;

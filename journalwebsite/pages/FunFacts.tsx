@@ -7,6 +7,7 @@ interface FunFactsProp {
   random?: boolean;
   admin?: boolean;
   width?: string;
+  facts?: any[];
 }
 export default function FunFacts(props: FunFactsProp) {
   const [funFacts, setFunFacts] = useState(
@@ -20,24 +21,33 @@ export default function FunFacts(props: FunFactsProp) {
     }[]
   );
   useEffect(() => {
-    fetch(props.admin ? "/api/getunpublishedfacts" : "/api/getfunfacts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        take: props.take || 10,
-        random: props.random || true,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setFunFacts(data);
-      });
+    if (props.facts) {
+      console.log(props.facts);
+      setFunFacts(props.facts);
+    } else {
+      fetch(props.admin ? "/api/getunpublishedfacts" : "/api/getfunfacts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          take: props.take || 10,
+          random: props.random || true,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setFunFacts(data);
+        });
+    }
   }, []);
-
-  return (
+  useEffect(() => {
+    if (props.facts) {
+      setFunFacts(props.facts);
+    }
+  }, [props.facts]);
+    return (
     <div
       className={styles.container}
       style={{
@@ -46,7 +56,7 @@ export default function FunFacts(props: FunFactsProp) {
     >
       <h2 className="heading-2">Fun Facts 🤯</h2>
       <ul>
-        {funFacts.map((fact) => (
+        {funFacts.length > 0 ? funFacts.map((fact) => (
           <li key={fact.id}>
             <p>{fact.content}</p>
             {props.admin && (
@@ -69,7 +79,7 @@ export default function FunFacts(props: FunFactsProp) {
                       body: JSON.stringify({
                         id: fact.id,
                       }),
-                    })
+                    });
                   }}
                 >
                   <Image
@@ -92,7 +102,7 @@ export default function FunFacts(props: FunFactsProp) {
                       body: JSON.stringify({
                         id: fact.id,
                       }),
-                    })
+                    });
                   }}
                 >
                   <Image
@@ -106,7 +116,7 @@ export default function FunFacts(props: FunFactsProp) {
               </div>
             )}
           </li>
-        ))}
+        )) : <p>No fun facts to show</p>}
         {props.admin && (
           <button
             className={styles.loadbutton}
@@ -118,7 +128,7 @@ export default function FunFacts(props: FunFactsProp) {
                 },
                 body: JSON.stringify({
                   take: props.take || 10,
-                  start: funFacts.length
+                  start: funFacts.length,
                 }),
               })
                 .then((res) => res.json())
