@@ -134,7 +134,7 @@ export default function Browse() {
                 }}> {article.title}</h2> :
                 <div
                   style={{
-                    width: "100%",
+                    width: "70ch",
                   }}
                 >
                   <Articlebox
