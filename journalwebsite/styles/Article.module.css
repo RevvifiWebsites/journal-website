@@ -21,6 +21,7 @@
 
 .container h1 {
   cursor: pointer;
+  width: 100%;
 }
 
 /* .container h1 {

@@ -34,3 +34,10 @@
     justify-content: center;
   }
 }
+.searchBar{
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #115ed4;
+  margin-bottom: 20px;
+}
