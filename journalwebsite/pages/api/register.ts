@@ -25,6 +25,7 @@ export  default async function handler(
             name: req.body.username,
             passwordHash: hash,
             country: req.body.country,
+            email: req.body.email,
             salt: salt
         }
         });

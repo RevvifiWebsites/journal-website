@@ -16,6 +16,7 @@ export default function Login() {
       <Popup popup = {popup} setPopup = {setPopup}/>
       <h2 className="heading-2">Sign Up to <span className="accent-color">young</span>minds.</h2>
       <input type="text" placeholder="Username" id="username"/>
+      <input type="email" placeholder="email" id="email"/>
       <input type="password" placeholder="Password" id="password"/>
       <input type="password" placeholder="Repeat Password" id="repeat"/>
      <select  id = "country" name = "country" style = {{
@@ -30,6 +31,7 @@ export default function Login() {
       }}>
         {countries.map((country) => {
           return <option value = {country} style = {{
+            fontSize: "0.5em",
             color: "black",
           }}>{country}</option>
         })}
@@ -40,6 +42,11 @@ export default function Login() {
             const password = (document.getElementById("password") as HTMLInputElement).value;
             const repeat = (document.getElementById("repeat") as HTMLInputElement).value;
             const country = (document.getElementById("country") as HTMLSelectElement).value;
+            const email = (document.getElementById("email") as HTMLInputElement).value;
+            if(email == "" || /\S+@\S+\.\S+/.test(email) == false){
+              setPopup("Please enter a valid email address");
+              return;
+            }
             if(password != repeat){
                 console.log("Passwords do not match");
                 setPopup("Passwords do not match");
@@ -59,7 +66,7 @@ export default function Login() {
             }
             const response = await fetch("/api/register", {
               method: "POST",
-              body: JSON.stringify({ username, password, country }),
+              body: JSON.stringify({ username, password, country, email }),
               headers: {
                 "Content-Type": "application/json",
               },
