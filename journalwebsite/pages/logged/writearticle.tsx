@@ -124,7 +124,6 @@ export default function Write() {
                     e.target.files[0].type.indexOf("msword") != -1 ||
                     e.target.files[0].type.indexOf("officedocument") != -1
                   ) {
-                    console.log(e.target.files[0]);
                     if (
                       e.target.files[0].size > 10000000 ||
                       e.target.files == null

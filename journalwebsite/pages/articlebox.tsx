@@ -35,7 +35,6 @@ export default function Articlebox(Article: {
               return res.text();
             })
             .then((blob) => {
-              console.log(blob);
               setFile("data:application/pdf;base64," + blob);
             });
         }

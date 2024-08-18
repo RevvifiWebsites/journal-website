@@ -22,7 +22,6 @@ export default function PDFViewer(props: {
       if (props.file instanceof File) {
         let reader = new FileReader();
         reader.onload = () => {
-            console.log(reader.result);
             setFile(reader.result as string);
         };
         reader.readAsDataURL(props.file);
@@ -37,22 +36,18 @@ export default function PDFViewer(props: {
     setFile(props.file as string);
   }, [props.file]);
   useEffect(() => {
-    console.log(file);
     async function run() {
       let box = document.getElementById("pdfviewer" + id);
       const dpi = window.devicePixelRatio;
       if (box && file != "" && file != undefined && file != null && typeof file == typeof " "
       ) {
-        console.log("here");
         let filedata = (file).split(",") as any;
         filedata = filedata[filedata.length - 1];
-        console.log(filedata);
         let doc = await pdf.getDocument({
           data: atob(filedata),
         });
         let completed = await doc.promise;
         let numpages = props.numpages  || completed.numPages;
-        console.log(numpages);
         for (let i = 1; i <= numpages; i++) {
           let c = document.createElement("canvas");
           box.appendChild(c);

@@ -14,7 +14,6 @@ export default async function handler(
         id: req.query.id as string,
       },
     });
-    console.log(user?.id);
     if (user) {
       let posts = await Prisma.article.findMany({
         where: {
@@ -56,4 +55,5 @@ export default async function handler(
     delete sentObj.email;
     res.status(200).json(sentObj);
   }
+  res.status(404).json({ message: "User not found" });
 }

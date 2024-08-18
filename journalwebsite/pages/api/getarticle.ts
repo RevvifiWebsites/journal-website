@@ -25,7 +25,6 @@ export  default async function handler(
                 prefix: `articles/${article.id}`,
                 mode: 'expanded',
             });
-            console.log(blobs);
             let file = blobs.blobs[0];
             res.status(200).json({...article, ...{file: file } });
     }

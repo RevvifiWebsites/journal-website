@@ -11,7 +11,6 @@ export default async function handler(
         return;
     }
     let artid = req.body.id as string;
-    console.log(artid + "id");
     let article = await Prisma.article.delete({
         where: {
             id: artid,

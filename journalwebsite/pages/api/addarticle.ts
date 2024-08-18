@@ -29,7 +29,6 @@ export  default async function handler(
                 cacheControlMaxAge: Infinity,
               });
               if(req.body.funfacts){
-                console.log(req.body.funfacts);
                 for(let fact of req.body.funfacts){
                     if(fact.length > 0){
                     await Prisma.funFact.create({

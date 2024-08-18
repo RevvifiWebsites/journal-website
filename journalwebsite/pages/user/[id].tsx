@@ -41,7 +41,12 @@ export default function User() {
   useEffect(() => {
     if (id) {
       fetch(`/api/getuser?id=${id}`)
-        .then((res) => res.json())
+        .then((res) => {
+          if(res.status == 404) {
+            window.location.href = "/404";
+          }
+          return res.json()
+        })
         .then(async (user) => {
           let promises = [];
           for(let i = 0; i < user.posts.length; i++) {
@@ -51,7 +56,6 @@ export default function User() {
               })));
           }
           await Promise.all(promises);
-          console.log(user);
           setUser(user);
         });
     }

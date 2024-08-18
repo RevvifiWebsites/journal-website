@@ -6,7 +6,6 @@ import FunFacts from "./FunFacts";
 import { useSearchParams } from "next/navigation";
 export default function Browse() {
   function loadMore() {
-    console.log("Loading more articles");
     setFetching(true);
     setArticles(
       articles.filter((e) => {
@@ -41,7 +40,6 @@ export default function Browse() {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           if (data.length == 0) {
             setArticles(
               articles.filter((e) => {
@@ -102,7 +100,6 @@ export default function Browse() {
             article.credit.toUpperCase().includes(search.toUpperCase())
         ).length == 0
       ) {
-        console.log("No more articles found");
         loadMore();
       }
     }

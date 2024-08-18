@@ -14,7 +14,6 @@ export default async function handler(
     let id = req.body.id as string;
     let vote = req.body.vote as number;
     if(vote != 1 && vote != -1){
-        console.log(vote);
         res.status(400).json({message: "Invalid vote"});
         return;
     }

@@ -5,7 +5,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(typeof req.body);
   let start = req.body.start as string | undefined;
   let article = await Prisma.article.findMany({
     where: {

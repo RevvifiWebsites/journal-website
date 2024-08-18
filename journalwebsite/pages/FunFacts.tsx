@@ -22,7 +22,6 @@ export default function FunFacts(props: FunFactsProp) {
   );
   useEffect(() => {
     if (props.facts) {
-      console.log(props.facts);
       setFunFacts(props.facts);
     } else {
       fetch(props.admin ? "/api/getunpublishedfacts" : "/api/getfunfacts", {
@@ -37,7 +36,6 @@ export default function FunFacts(props: FunFactsProp) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setFunFacts(data);
         });
     }

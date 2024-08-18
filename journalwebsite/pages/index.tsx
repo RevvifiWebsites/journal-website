@@ -33,7 +33,6 @@ export default function Home() {
         take: 3,
       }),
     }).then((res) => res.json()).then((data) => {
-      console.log(data);
       setFeaturedArticles(data);
     });
     fetch("/api/getarticlelist", {
@@ -44,6 +43,7 @@ export default function Home() {
       body: JSON.stringify({
         start: 0,
         take: 5,
+        search: ''
       }),
     }).then((res) => res.json()).then((data) => {
       setArticles(data);
@@ -145,7 +145,6 @@ export default function Home() {
         </div>
         <div className={styles.footerBottom}>
           <p className="body-secondary">Copyright © 2024 YoundMinds, All Rights Reserved</p>
-          <p className="body-secondary">Terms & Conditions<span>Privacy Policy</span></p>
         </div>
 
       </footer>

@@ -11,7 +11,6 @@ export default async function handler(
         return;
     }
   let start = req.body.start as string | undefined;
-  console.log(start);
   let facts = await Prisma.funFact.findMany({
     where: {
         OR: [

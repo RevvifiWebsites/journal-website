@@ -13,7 +13,6 @@ export default function Home() {
     email: "Loading...",
     admin: false,
   });
-  console.log(user);
   useEffect(() => {
     if(document.cookie.indexOf("id") == -1){
       window.location.href = "/login";

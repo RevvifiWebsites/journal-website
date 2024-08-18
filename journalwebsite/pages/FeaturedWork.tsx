@@ -28,7 +28,6 @@ export default function FeaturedWork(props: FeaturedWorkProps) {
                 fetch("/placeholderpdf.txt").then((res) => {
                   return res.text();
                 }).then((blob) => {
-                  console.log(blob);
                   setFile("data:application/pdf;base64," + blob);
                 });
               }

@@ -16,7 +16,7 @@ export default function Login() {
       <Popup popup = {popup} setPopup = {setPopup}/>
       <h2 className="heading-2">Sign Up to <span className="accent-color">young</span>minds.</h2>
       <input type="text" placeholder="Username" id="username"/>
-      <input type="email" placeholder="email" id="email"/>
+      <input type="email" placeholder="Email" id="email"/>
       <input type="password" placeholder="Password" id="password"/>
       <input type="password" placeholder="Repeat Password" id="repeat"/>
      <select  id = "country" name = "country" style = {{
@@ -48,7 +48,6 @@ export default function Login() {
               return;
             }
             if(password != repeat){
-                console.log("Passwords do not match");
                 setPopup("Passwords do not match");
               return;
             }

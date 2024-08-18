@@ -67,7 +67,6 @@ export default function Home() {
       .split(";")
       .find((x) => x.includes("id="))
       ?.split("=")[1];
-    console.log(selfid);
   }
   const [admin, setAdmin] = useState(false);
   const [pdffile, setPdfFile] = useState({} as any);
@@ -143,7 +142,6 @@ export default function Home() {
       .then((data) => {
         setArticle(data);
         if (data.file) {
-          console.log(data.file.downloadUrl);
           fetch(data.file.downloadUrl, {})
             .then((res) => {
               if (res.ok) {

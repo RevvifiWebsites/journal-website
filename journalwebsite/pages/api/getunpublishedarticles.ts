@@ -18,7 +18,6 @@ export default async function handler(
     skip: start ? parseInt(start) : 0,
     take: 10,
   });
-  console.log(article);
   if (article) {
     res.status(200).json(article);
   } else {

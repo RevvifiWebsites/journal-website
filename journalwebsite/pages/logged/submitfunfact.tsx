@@ -89,7 +89,6 @@ export default function SubmitFunFact() {
                 setPopup("Please enter at least one fun fact");
                 return;
               }
-              console.log(factvalue);
               fetch("/api/submitfunfact", {
                 method: "POST",
                 headers: {

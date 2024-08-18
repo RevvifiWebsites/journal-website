@@ -5,10 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(typeof req.body);
   let start = req.body.start as string | undefined;
   let search = req.body.search as string | undefined;
-  console.log(req.body);
   let acount = await getUser(req);
   if (acount && acount.admin) {
     let article = await Prisma.article.findMany({
