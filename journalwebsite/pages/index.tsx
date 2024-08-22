@@ -104,12 +104,6 @@ export default function Home() {
         </div>
       </div>
       <div className={styles.uniList}>
-        <img src="/icons/penn.svg" draggable="false"/>
-        <img src="/icons/duke.svg" draggable="false"/>
-        <img src="/icons/nyu.svg" draggable="false"/>
-        <img src="/icons/oxford.svg" draggable="false"/>
-        <img src="/icons/stanford.svg" draggable="false"/>
-        <img src="/icons/lseps.svg" draggable="false"/>
       </div>
       <section className={styles.fw} id = "featured">
         <img className={styles.backgroundImage} src="/images/BG2.png" />

@@ -128,7 +128,7 @@ const Navigation = () => {
         }
       })
       .then((data) => {
-        setAdmin(data.admin);
+        setAdmin(data?.admin);
       });
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 768); // Adjust this breakpoint as needed
