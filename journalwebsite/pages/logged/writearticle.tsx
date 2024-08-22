@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styles from "@/styles/Write.module.css";
 import { useEffect, useState } from "react";
-import Markdown from "react-markdown";
 import Navigation from "../sidebar";
 import PDFViewer from "../pdfviewer";
 import PopUp from "../popup";
@@ -110,7 +109,7 @@ export default function Write() {
             <div className={styles.filelabel}>
               {file
                 ? file.name
-                : loading ? <>Uploading file</> : "Drag and drop a file here or click the button below. (PDF, DOC, DOCX)"}
+                : loading ? <>Uploading file</> : "Drag and drop a file here or click the button below. (PDF only)"}
             </div>
             <br />
             {loading && <div className={styles.loadingbar}></div>}
@@ -124,10 +123,14 @@ export default function Write() {
                     e.target.files[0].type.indexOf("msword") != -1 ||
                     e.target.files[0].type.indexOf("officedocument") != -1
                   ) {
+                    setPopup("Please upload a PDF file");
+                    return;
+                  }
                     if (
                       e.target.files[0].size > 10000000 ||
                       e.target.files == null
                     ) {
+                      setPopup("File is too large, please upload a smaller file");
                       return;
                     }
                     const base64file = await new Promise((resolve, reject) => {
@@ -164,12 +167,10 @@ export default function Write() {
                         }
                       )
                     );
-                  } else {
                     setFile(e.target.files[0]);
-                  }
                 }
               }}
-              accept=".pdf, .doc, .docx"
+              accept=".pdf"
             />
             {(file  ) ? (
               <button
