@@ -8,8 +8,7 @@ export default function Articlebox(Article: {
   title: string;
   credit: string;
 }) {
-  pdf.GlobalWorkerOptions.workerSrc =
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.mjs";
+  pdf.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
   const [file, setFile] = useState(null as any);
   useEffect(() => {
     fetch("/api/getpdf?id=" + Article.id)

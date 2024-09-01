@@ -15,8 +15,7 @@ export default function PDFViewer(props: {
     const numPages = props.numpages;
     const id = useId();
   const [file, setFile] = useState("");
-  pdf.GlobalWorkerOptions.workerSrc =
-    "/pdf.worker.mjs";
+  pdf.GlobalWorkerOptions.workerSrc ="/pdf.worker.min.js";
   useEffect(() => {
     async function run() {
       if (props.file instanceof File) {

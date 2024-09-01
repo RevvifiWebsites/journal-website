@@ -104,7 +104,7 @@ export default function Home() {
         }
       })
       .then((data) => {
-        if (data.admin) {
+        if (data?.admin) {
           setAdmin(true);
         }
       });
