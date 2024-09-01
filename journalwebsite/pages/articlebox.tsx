@@ -50,7 +50,7 @@ export default function Articlebox(Article: {
         if (c) {
           c.width = 800 * dpi;
           c.height = 400 * dpi;
-          let pdfjs = await pdf.getDocument({ data: atob(file.split(",")[1]) });
+          let pdfjs = await pdf.getDocument({ data: atob(file.split(",")[1]), isEvalSupported:false } );
           let completed = await pdfjs.promise;
           let page = await completed.getPage(1);
           const viewport = page.getViewport({

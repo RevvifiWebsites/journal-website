@@ -45,6 +45,7 @@ export default function PDFViewer(props: {
         filedata = filedata[filedata.length - 1];
         let doc = await pdf.getDocument({
           data: atob(filedata),
+          isEvalSupported:false
         });
         let completed = await doc.promise;
         let numpages = props.numpages  || completed.numPages;
