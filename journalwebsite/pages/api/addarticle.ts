@@ -7,7 +7,6 @@ export const config = {
   };
 import type { NextApiRequest, NextApiResponse } from "next";
 import  Prisma from '@/lib/prisma';
-import * as argon2 from "argon2";
 import { sign } from 'jsonwebtoken';
 import getUser from "@/lib/getuser";
 import { put } from '@vercel/blob';
