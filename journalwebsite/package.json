@@ -13,11 +13,11 @@
     "@prisma/client": "^5.17.0",
     "@vercel/blob": "^0.23.4",
     "@vercel/postgres": "^0.9.0",
-    "argon2": "^0.40.3",
+    "bcrypt-ts": "^5.0.2",
     "jsonwebtoken": "^9.0.2",
     "libreoffice-convert": "^1.6.0",
     "next": "14.2.5",
-    "pdfjs-dist": "^4.5.136",
+    "pdfjs-dist": "3.11.174",
     "prisma": "^5.17.0",
     "react": "^18",
     "react-dom": "^18"

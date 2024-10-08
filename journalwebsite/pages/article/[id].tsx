@@ -98,7 +98,7 @@ export default function Home(props : any) {
         }
       })
       .then((data) => {
-        if (data.admin) {
+        if (data?.admin) {
           setAdmin(true);
         }
       });

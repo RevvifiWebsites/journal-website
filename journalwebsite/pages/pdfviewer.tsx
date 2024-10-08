@@ -15,8 +15,7 @@ export default function PDFViewer(props: {
     const numPages = props.numpages;
     const id = useId();
   const [file, setFile] = useState("");
-  pdf.GlobalWorkerOptions.workerSrc =
-    "/pdf.worker.mjs";
+  pdf.GlobalWorkerOptions.workerSrc ="/pdf.worker.min.js";
   useEffect(() => {
     async function run() {
       if (props.file instanceof File) {
@@ -45,6 +44,7 @@ export default function PDFViewer(props: {
         filedata = filedata[filedata.length - 1];
         let doc = await pdf.getDocument({
           data: atob(filedata),
+          isEvalSupported:false
         });
         let completed = await doc.promise;
         let numpages = props.numpages  || completed.numPages;
