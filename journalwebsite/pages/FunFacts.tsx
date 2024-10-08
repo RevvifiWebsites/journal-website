@@ -8,6 +8,7 @@ interface FunFactsProp {
   admin?: boolean;
   width?: string;
   facts?: any[];
+  rus: boolean;
 }
 export default function FunFacts(props: FunFactsProp) {
   const [funFacts, setFunFacts] = useState(
@@ -52,7 +53,7 @@ export default function FunFacts(props: FunFactsProp) {
         width: props.width || "100%",
       }}
     >
-      <h2 className="heading-2">Fun Facts 🤯</h2>
+      <h2 className="heading-2">{props.rus ? "Интересные факты" : "Fun Facts"} 🤯</h2>
       <ul>
         {funFacts.length > 0 ? funFacts.map((fact) => (
           <li key={fact.id}>

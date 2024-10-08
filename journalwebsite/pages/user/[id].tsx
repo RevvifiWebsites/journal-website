@@ -5,6 +5,7 @@ import styles from "../../styles/User.module.css";
 import Image from "next/image";
 import PDFViewer from "../pdfviewer";
 import FunFacts from "../FunFacts";
+import Navigation from "../sidebar";
 export interface User {
   id: string;
   createdAt: string;
@@ -35,7 +36,7 @@ export interface Fact {
   articleId?: string;
   published: boolean;
 }
-export default function User() {
+export default function User(props : any) {
   const id = useRouter().query.id;
   const [user, setUser] = useState({} as User);
   useEffect(() => {
@@ -62,16 +63,16 @@ export default function User() {
   }, [id]);
   return (
     <div className={styles.page}>
-      <SideBar />
+      <Navigation rus = {props.rus} />
       <h1>{user.username}</h1>
       <p>
-        Joined {user.createdAt && new Date(user.createdAt).toLocaleDateString()}
+        {props.rus ? "Присоединился": "Joined"} {user.createdAt && new Date(user.createdAt).toLocaleDateString()}
       </p>
       <div className={styles.statchips}>
         <div className={styles.statchip}>
           <div className={styles.textchip}>
             <h2>{user.posts?.length}</h2>
-            <p>{`Article${ user?.posts?.length != 1 ? 's' : ""}`}</p>
+            <p>{`${props.rus ? "Работы" : "Article" + (  user?.posts?.length != 1 ? 's' : "")}`}</p>
           </div>
           <Image
             src="/images/articlechip.svg"
@@ -84,7 +85,7 @@ export default function User() {
         <div className={styles.statchip}>
           <div className={styles.textchip}>
             <h2>{user?.facts?.length} </h2>
-            <p>{`Fact${ user?.facts?.length != 1 ? 's' : ""}`}</p>
+            <p>{`${props.rus ? "Факты" : "Fact" + (user?.facts?.length != 1 ? 's' : "" )}`}</p>
           </div>
           <Image
             src="/images/unpublishedchip.svg"
@@ -97,7 +98,7 @@ export default function User() {
         <div className={styles.statchip}>
           <div className={styles.textchip}>
             <h2>{user?.comments?.length} </h2>
-            <p>{`Comment${ user?.comments?.length != 1 ? 's' : ""}`}</p>
+            <p>{`${props.rus ? "Комментарии" : ("Comment" +  (user?.comments?.length != 1 ? 's' : ""))}`}</p>
           </div>
           <Image
             src="/images/comment.svg"
@@ -130,10 +131,10 @@ export default function User() {
                       />
               </div>
             );
-          }) : <h2>No published articles</h2>}
+          }) : <h2>{props.rus ? "Нет опубликованных работ" : "No published articles"}</h2>}
         </div>
         <div className={styles.funfacts}>
-          <FunFacts facts={user.facts || [] } />
+          <FunFacts facts={user.facts || [] } rus = {props.rus}/>
         </div>
       </div>
     </div>

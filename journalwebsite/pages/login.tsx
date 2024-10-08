@@ -4,11 +4,11 @@ import styles from "@/styles/Login.module.css";
 import { useState } from "react";
 import Navigation from "./sidebar";
 
-export default function Login() {
+export default function Login( props : {rus : boolean}) {
   const [message, setMSG] = useState("");
   return (
     <div className={styles.container}>
-      <Navigation />
+    <Navigation rus = {props.rus}/>
       {/* <img src="/images/BG.png" className="background-image" /> */}
       <h1>{message}</h1>
       <h2 className="heading-2">Login to <span className="accent-color">young</span>minds.</h2>
@@ -29,7 +29,7 @@ export default function Login() {
             });
             if (response.ok) {
               setMSG("Logged in");
-              window.location.href = "/logged/home";
+              window.location.href = "/";
             } else {
               setMSG(JSON.parse(await response.text()).message);
             }

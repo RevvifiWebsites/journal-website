@@ -6,7 +6,7 @@ import SideBar from "../sidebar";
 import PDFViewer from "../pdfviewer";
 import FunFacts from "../FunFacts";
 
-export default function Admin() {
+export default function Admin(props : any) {
   const [stats, setStats] = useState({
     articles: 0,
     unpublished: 0,
@@ -91,7 +91,7 @@ export default function Admin() {
   }, []);
   return (
     <div>
-      <SideBar />
+      <SideBar rus = {props.rus}/>
       <div className={styles.page}>
         <h1 className="heading-2">Dashboard</h1>
         <p>
@@ -210,7 +210,7 @@ export default function Admin() {
           {/* Fun Facts */}
           <div className={styles.factslist}>
             {/* <FunFacts admin published width="50vw" /> */}
-            <FunFacts admin width="50vw" take={20} />
+            <FunFacts admin width="50vw" take={20} rus = {props.rus}/>
           </div>
         </div>
       </div>

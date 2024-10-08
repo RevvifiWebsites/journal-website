@@ -6,6 +6,8 @@ import style from "../../styles/Read.module.css";
 import PDFViewer from "../pdfviewer";
 
 import Image from "next/image";
+import { Comment } from "@prisma/client";
+import Navigation from "../sidebar";
 function timeSince(date: Date) {
   var seconds = Math.floor((Number(new Date()) - Number(date)) / 1000);
 
@@ -32,7 +34,7 @@ function timeSince(date: Date) {
   }
   return Math.floor(seconds) + " seconds";
 }
-export default function Home() {
+export default function Home(props : any) {
   async function vote(commentid: string, vote: number) {
     fetch(`/api/votecomment`, {
       method: "POST",
@@ -84,15 +86,7 @@ export default function Home() {
   });
   const router = useRouter();
   const [comments, setComments] = useState([
-    {
-      authorName: "Loading...",
-      content: "Loading...",
-      id: "Loading...",
-      downvotes: [""],
-      upvotes: [""],
-      createdAt: "",
-    },
-  ]);
+  ] as Comment[]);
   const [opencomment, setOpenComment] = useState(false);
   const [comment, setComment] = useState("");
   const { id } = router.query;
@@ -156,7 +150,7 @@ export default function Home() {
   }, [id]);
   return (
     <div className={style.page}>
-      <SideBar></SideBar>
+      <Navigation rus = {props.rus}></Navigation>
       {!article.published && (
         <div className={style.publishedpopup}>
           This article is not yet published. It will not be discoverable to
@@ -322,10 +316,10 @@ export default function Home() {
             {comments.map((comment) => {
               return (
                 <div className={style.comment}>
-                  <p className={style.commentauth}>
+                  <a href = {"/user/" + (comment.authorId  )    } className={style.commentauth}>
                     {comment.authorName} |{" "}
                     {timeSince(new Date(comment.createdAt))} ago{" "}
-                  </p>
+                  </a>
                   <p className={style.commenttext}>{comment.content}</p>
                   <div className={style.votesection}>
                     <button
@@ -424,7 +418,9 @@ export default function Home() {
                       upvotes: [],
                       downvotes: [],
                       id: data.id,
-                      createdAt: new Date().toLocaleString(),
+                      authorId: data.authorId,
+                      createdAt: new Date(),
+                      articleId: id as string,
                     },
                   ]);
                 });

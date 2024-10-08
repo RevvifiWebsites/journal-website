@@ -19,5 +19,13 @@ export default async function handler(
             published: req.body.unpublish ? false : true,
         },
     });
+    await Prisma.funFact.updateMany({
+        where: {
+            articleId: id,
+        },
+        data: {
+            published: req.body.unpublish ? false : true,
+        },
+    });
     res.status(200).json({message: "Article published"});
 }

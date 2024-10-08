@@ -3,8 +3,9 @@ import SideBar from "../sidebar";
 import styles from "@/styles/Write.module.css";
 import Popup from "../popup";
 import Image from "next/image";
+import Navigation from "../sidebar";
 
-export default function SubmitFunFact() {
+export default function SubmitFunFact(props : {rus : boolean}) {
   const [numfacts, setNumFacts] = useState(1);
   useEffect(() => {
     const submittedFacts = document.getElementById("submmitedfacts");
@@ -22,7 +23,7 @@ export default function SubmitFunFact() {
   const [popup, setPopup] = useState(null as string | null);
   return (
     <>
-      <SideBar />
+      <Navigation rus = {props.rus} />
       <Popup popup={popup} setPopup={setPopup} />
       <div className={styles.page}>
         <div className={styles.pageContent}>

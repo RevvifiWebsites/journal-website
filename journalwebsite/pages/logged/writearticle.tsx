@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Navigation from "../sidebar";
 import PDFViewer from "../pdfviewer";
 import PopUp from "../popup";
-export default function Write() {
+export default function Write(props : {rus : boolean}) {
   const [article, setArticle] = useState({
     title: "Enter Title",
     authors: "",
@@ -15,7 +15,7 @@ export default function Write() {
   const [popup, setPopup] = useState(null as string | null);
   return (
     <div className={styles.page}>
-      <Navigation />
+      <Navigation rus = {props.rus}/>
       <img
         src="/images/BG.png"
         className="background-image"
@@ -25,10 +25,10 @@ export default function Write() {
 
       </PopUp>
       <div className={styles.pageContent}>
-        <h1 className="heading-2">Submit Your Research Here</h1>
+        <h1 className="heading-2">{props.rus ? "Добавьте свойпроект здесь" : "Submit Your Research Here"}</h1>
         {/* Research Title Input */}
         <div>
-          <h2 className="body-bold"> Work Title</h2>
+          <h2 className="body-bold"> {props.rus ?"Название работы": "Work Title"}</h2>
           <input
             id="title"
             placeholder="e.g The Effects of Climate Change on the Economy"
@@ -41,7 +41,7 @@ export default function Write() {
 
         {/* Authors Input */}
         <div>
-          <h2 className="body-bold">Work Authors</h2>
+          <h2 className="body-bold">{props.rus ? "Авторы работы" : "Work Authors"}</h2>
           <input
             id="Authors"
             placeholder="e.g John Doe, Anna Mark"
@@ -52,7 +52,7 @@ export default function Write() {
           ></input>
         </div>
         <div>
-          <h2 className="body-bold"> Attach Fun Facts</h2>
+          <h2 className="body-bold"> {props.rus ? "Добавить интересные факты" : "Attach Fun Facts"}</h2>
           <ol id="submmitedfacts" className={styles.factslist}>
             {Array.from({ length: numfacts }).map((_, i) => (
               <li key={i} className = {
@@ -88,11 +88,10 @@ export default function Write() {
             onClick={(e) => {
               setNumFacts(numfacts + 1);
             }}
-          >
-            Add Fun Fact
+          >{props.rus ? "Добавить место":"Add Fun Fact"}
           </button>
         </div>
-        <h2 className="body-bold">Submit Article</h2>
+        <h2 className="body-bold">{props.rus ? 'Добавить проект':"Submit Article"}</h2>
         <div>
           {/* Selection for File or Text */}
           <div className={styles.rightcontents}></div>

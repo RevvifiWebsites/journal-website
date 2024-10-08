@@ -8,7 +8,8 @@ import FunFacts from "./FunFacts";
 import styles from "../styles/Index.module.css"
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Home(props : {rus : boolean}) {
+  console.log(props.rus);
   const [articles, setArticles] = useState([] as {
     id: string;
     title: string;
@@ -54,16 +55,18 @@ export default function Home() {
     <div className={styles.container}>
       {/* <img src="/images/BG.png" className="background-image" draggable="false"/> */}
       {/* <div className={styles.sidebar}></div> */}
-      <Navigation/>
+      <Navigation rus = {props.rus}/>
       <div className={styles.hero}>
         <div className={styles.heroLeft}>
-        <h1 className="heading-1">Modern Hub for <br/> Young Researchers</h1>
-        <p className="body-regular">Here high-school and college students can share their scientific research in English or Russian. They can also exchange ideas and opinions</p>
+        <h1 className="heading-1">{props.rus ? "Центр молодых " : "Modern Hub for" }<br/> {props.rus ? "исследователей" : "Young Researchers" }</h1>
+        <p className="body-regular">{props.rus ? `Здесь старшеклассники и студенты могут поделиться своими
+научно-исследовательскими работами на английском или русском
+языке. Они также могут обмениваться своими идеями и мнениями.` : "Here high-school and college students can share their scientific research in English or Russian. They can also exchange ideas and opinions"}</p>
         <div className={styles.buttonContainer}>
-          <button className="button-primary"><a href="/login">Sign Up</a></button>
+          <button className="button-primary"><a href="/login">{props.rus ? "Зарегистрироваться" : "Sign Up"}</a></button>
           <button className="button-secondary" onClick={ () => {
             window.scrollTo({top: document.getElementById("featured")?.getBoundingClientRect().top, behavior: 'smooth'});
-          }}>View Featured 🠇</button>
+          }}>{props.rus ? "Смотреть работы" : "View Featured"} 🠇</button>
         </div>
         </div>
 
@@ -73,17 +76,17 @@ export default function Home() {
           <div className={`${styles.heroCard} ${styles.item1}`}>
             <div className={styles.flex}>
               <img src="/icons/pencil.svg" />
-              <p className="body-bold">Public Research</p>
+              <p className="body-bold">{props.rus ? "Публичные работы" : "Public Research"}</p>
             </div>
-            <p className="body-small">Share your own research with others. Your research will first be check by our moderators.</p>
+            <p className="body-small">{props.rus ? "Делитесь собственными  исследовательскими работами с другими. Сначала  ваша работа будет отправлена на проверку.": " Share your own research with others. Your research will first be check by our moderators."}</p>
           </div>
 
           <div className={`${styles.heroCard} ${styles.item2}`}>
           <div className={styles.flex}>
               <img src="/icons/eye.svg" />
-              <p className="body-bold">View Researches</p>
+              <p className="body-bold">{props.rus ? "исследовательскими" :"View Researches"}</p>
             </div>
-            <p className="body-small">Explore our huge library, with thousands of researches on various topics, by brilliant minds.</p>
+            <p className="body-small">{props.rus ? "Наша библиотке пока еще мала, на надеемся, что со временем она будет cta новиться только больше!" : "Explore our huge library, with thousands of researches on various topics, by brilliant minds."}</p>
           </div>
 
           <div className={`${styles.heroCard} ${styles.item3}`}>
@@ -91,15 +94,15 @@ export default function Home() {
               <img src="/icons/bulb.svg" />
               <p className="body-bold">Fun Fact Scattered</p>
             </div>
-            <p className="body-small">You can find fun facts scattered around the website, so your mind stays refreshed.</p>
+            <p className="body-small">{ props.rus ? "йте интересные факты разбросанные по всему сайту, и добавляйте собственные!" : "You can find fun facts scattered around the website, so your mind stays refreshed."}</p>
           </div>
 
           <div className={`${styles.heroCard} ${styles.item4}`}>
           <div className={styles.flex}>
               <img src="/icons/people.svg" />
-              <p className="body-bold">Vibrant Community</p>
+              <p className="body-bold">{props.rus ? "Дружеское сообщество" : "Vibrant Community"}</p>
             </div>
-            <p className="body-small">Engage with other brilliant minds. Remember to always stay respectful in comments.</p>
+            <p className="body-small">{props.rus ? "Общайтесь с такими же увлеченными людьми": "Engage with other brilliant minds. Remember to always stay respectful in comments."}</p>
           </div>
         </div>
       </div>
@@ -129,7 +132,7 @@ export default function Home() {
               })
             }
         </div>
-        <FunFacts/>
+        <FunFacts rus = {props.rus}/>
       </div>
       <footer>
         <img className={styles.footerCurve} src="/images/footerCurve.png" />

@@ -2,14 +2,17 @@
 import styles from "@/styles/Sidebar.module.css";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-
-const Sidebar = (props : {admin: boolean}) => {
+import russianLocale from "@/lib/locale";
+const Sidebar = (props : {
+  russian: any;admin: boolean
+}) => {
   const condensedLogo = <p className={styles.logoText}><span className="accent-color">y</span>m</p>
   const expandedLogo = <p className={styles.logoText}><span className="accent-color">young</span>minds.</p>
 
   const [isHovering, setIsHovering] = useState(false);
   const [isclient , setClient] = useState(false);
   useEffect(() => {
+    console.log(props);
     setClient(true);
   }, []);
   return (
@@ -19,7 +22,9 @@ const Sidebar = (props : {admin: boolean}) => {
         onMouseLeave={() => setIsHovering(false)}
     >
       {/* Top Nav */}
-      <div className={styles.navcontainers}>
+      <div className={styles.navcontainers} style = {{
+        width: "100%",
+      }}>
         <a href = "/">
           <div>
             {isHovering ? expandedLogo : condensedLogo}
@@ -27,15 +32,21 @@ const Sidebar = (props : {admin: boolean}) => {
         </a>
         <a href = "/browse" className={styles.navLink}>
           <Image src="/images/book.svg" alt="browse articles image" width={0} height={0} className={styles.navimage}></Image>
-          <p className="body-bold">View Researches</p>
+          <p className="body-bold" suppressHydrationWarning> { props.russian ? "Смотреть работы" :"View Researches"} </p>
         </a>
-        <a href = "/logged/writearticle" className={styles.navLink}>
-          <Image src="/images/plus.svg" alt="add article image" width={0} height={0} className={styles.navimage}></Image>
-          <p className="body-bold">Add Research</p>
+        <a href = "/logged/writearticle" className={styles.navLink} style = {{
+          whiteSpace: "normal",
+        }}>
+          <Image src="/images/plus.svg" alt="add article image" width={0} height={0} className={styles.navimage} ></Image>
+          <p className="body-bold" style = {{
+            whiteSpace: "normal",
+          }}>{ props.russian ? "Добавить исследовательску работу" : "Add Research"}</p>
         </a>
         <a href = "/logged/submitfunfact" className={styles.navLink}>
           <Image src="/images/Lightbulb.svg" alt="add article image" width={0} height={0} className={styles.navimage}></Image>
-          <p className="body-bold">Add Fun Facts</p>
+          <p className="body-bold" style = {{
+              whiteSpace: "normal",
+          }}>{props.russian ? "Добавить интересные факты" : "Add Fun Facts"}</p>
         </a>
       </div>
       {/* Bottom Nav */}
@@ -62,7 +73,7 @@ const Sidebar = (props : {admin: boolean}) => {
   )
 }
 
-const Topbar = (props : {admin : boolean}) => {
+const Topbar = (props : {admin : boolean, russian: boolean}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleNav = () => {
     setIsExpanded(!isExpanded);
@@ -112,7 +123,7 @@ const Topbar = (props : {admin : boolean}) => {
   )
 }
 
-const Navigation = () => {
+const Navigation = (props : {rus : boolean}) => {
   const [isMobile, setIsMobile] = useState(false);
   const [admin , setAdmin] = useState(false);
   useEffect(() => {
@@ -142,7 +153,7 @@ const Navigation = () => {
 
   return (
     <>
-      {isMobile ? <Topbar admin = {admin} /> : <Sidebar admin = {admin} />}
+      {isMobile ? <Topbar admin = {admin} russian = {props.rus} /> : <Sidebar admin = {admin} russian = {props.rus} />}
     </>
   );
 };

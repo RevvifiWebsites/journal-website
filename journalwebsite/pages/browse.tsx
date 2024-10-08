@@ -4,7 +4,7 @@ import styles from "../styles/Browse.module.css";
 import Articlebox from "./articlebox";
 import FunFacts from "./FunFacts";
 import { useSearchParams } from "next/navigation";
-export default function Browse() {
+export default function Browse( props : {rus : boolean}) {
   function loadMore() {
     setFetching(true);
     setArticles(
@@ -106,12 +106,12 @@ export default function Browse() {
   }, [search]);
   return (
     <div className={styles.container}>
-      <Navigation />
-      <div>
-        <h1 className="heading-2">Browse Researches</h1>
+      <Navigation rus = {props.rus}/>
+       <div>
+        <h1 className="heading-2">{props.rus ? "Ищите работы" : "Browse Researches"}</h1>
         <input
           type="text"
-          placeholder="Search"
+          placeholder={props.rus ? "Поиск" : "Search"}
           className={styles.searchBar}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -156,7 +156,7 @@ export default function Browse() {
           Load More
         </button>
       </div>
-      <FunFacts take={30} />
+      <FunFacts take={30} rus = {props.rus} />
     </div>
   );
 }
